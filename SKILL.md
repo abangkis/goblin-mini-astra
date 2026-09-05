@@ -13,7 +13,7 @@ This is a routing baseline, not a measured quota-saving guarantee. API prices, t
 
 An explicit `$goblin-mini-astra` invocation or selection activates `MINI-ASTRA` for subsequent work in the current task. The latest explicit Goblin mode selection or trustworthy active marker wins. Stop this routing when the user stops Goblin mode or selects another Goblin mode. Do not combine inactive routing policies. If multiple modes are requested without a clear selection, clarify before delegating. If the active mode becomes uncertain after compaction, continue ordinary nondelegated work where possible and clarify before applying this routing.
 
-The Coordinator's design target is `gpt-6-astra` / `medium`. A skill cannot change the running main task's model or effort. Respect a user-selected runtime; disclose a mismatch with the target once rather than pretending to switch it. Never open a new task merely to obtain the preferred Coordinator.
+The Coordinator's design target is `gpt-6-astra` / `low`. A skill cannot change the running main task's model or effort. Respect a user-selected runtime; disclose a mismatch with the target once rather than pretending to switch it. Never open a new task merely to obtain the preferred Coordinator.
 
 Keep role/design target, requested runtime, and actual runtime separate. Confirm actual provider/model/effort only from authoritative host or response metadata; otherwise mark the missing information `unverified`. Successful work and requested overrides are not proof of the runtime used.
 
@@ -21,18 +21,18 @@ Keep role/design target, requested runtime, and actual runtime separate. Confirm
 
 | Role or situation | Requested model / effort | Route when |
 | --- | --- | --- |
-| Coordinator | `gpt-6-astra` / `medium` design target | Scope, routing, user communication, integration, and final acceptance |
+| Coordinator | `gpt-6-astra` / `low` design target | Scope, routing, user communication, integration, and final acceptance |
 | Direct execution | Existing Coordinator | Work is small, clear, already understood, or a continuation of verified work |
 | Scout | `gpt-5.6-luna` / `high` | Read-only questions have a bounded search area and observable answers |
 | Worker | `gpt-5.6-luna` / `xhigh` | Nontrivial implementation or debugging has a clear scope and acceptance criteria |
 | Deep Worker | `gpt-5.6-luna` / `max` | A difficult local problem has sufficient evidence, clear boundaries, and a concrete reason for deeper reasoning |
-| Escalation | `gpt-6-astra` / `xhigh` | Architectural ambiguity, interacting components, conflicting evidence, or a diagnosed reasoning limitation warrants stronger reasoning |
+| Escalation | `gpt-6-astra` / `medium` | Architectural ambiguity, interacting components, conflicting evidence, or a diagnosed reasoning limitation warrants stronger reasoning |
 
 Use direct execution when briefing and checking a delegate would cost more than doing the remaining work. Conversely, the Coordinator should not complete substantial discovery or implementation and then delegate it again.
 
 Luna Max is selective, not the automatic destination for every hard task. Route known architectural or cross-component uncertainty directly to Astra when justified. There is no mandatory `High -> XHigh -> Max -> Astra` ladder, and task length alone does not justify escalation. Effort levels are not equivalent capability scores across models.
 
-Use the existing Coordinator for an escalation it can resolve with its current context and runtime. Request an Astra XHigh delegate only when isolated investigation or execution materially helps and the host permits delegation. If the main effort cannot be changed, do not claim XHigh was applied. An Astra delegate is not an obligatory review stage.
+Use the existing Coordinator for an escalation it can resolve with its current context and runtime. Request an Astra Medium delegate only when isolated investigation or execution materially helps and the host permits delegation. If the main effort cannot be changed, do not claim Medium was applied. An Astra delegate is not an obligatory review stage.
 
 ## Work from the remaining delta
 
@@ -73,7 +73,7 @@ An escalation brief preserves successful work and identifies the unresolved ques
 
 ## Optional GPT Pro decision gate
 
-GPT Pro remains an optional decision/audit consultation, separate from Astra routing. Astra, including Astra XHigh, is not evidence that GPT Pro was consulted.
+GPT Pro remains an optional decision/audit consultation, separate from Astra routing. Astra, including Astra Medium, is not evidence that GPT Pro was consulted.
 
 Use Pro only when explicitly requested or when the user approves a consultation for a material decision and a real Pro target is available. Invocation of this skill does not authorize an external message, upload, cross-task write, or task creation. Honor explicit authorization already present; do not ask for it again for the same consultation and target.
 

@@ -8,11 +8,11 @@ Derived from [Goblin Mini Pro](https://github.com/abangkis/goblin-mini-pro), wit
 
 | Role | Model / reasoning design target | Purpose |
 | --- | --- | --- |
-| Coordinator | GPT-6 Astra / Medium | Scope, routing, integration, and final acceptance |
+| Coordinator | GPT-6 Astra / Low | Scope, routing, integration, and final acceptance |
 | Scout | GPT-5.6 Luna / High | Bounded read-only investigation |
 | Worker | GPT-5.6 Luna / XHigh | Implementation and debugging with clear acceptance criteria |
 | Deep Worker | GPT-5.6 Luna / Max | Selectively address difficult, well-defined local problems |
-| Escalation | GPT-6 Astra / XHigh | Resolve architectural ambiguity or interacting components |
+| Escalation | GPT-6 Astra / Medium | Resolve architectural ambiguity or interacting components |
 
 Small tasks stay with the Coordinator when delegation would add more work. There is no mandatory escalation ladder. Delegation depends on the host's available tools and conditions; a skill cannot change the main task's model or reasoning effort. Select the intended Coordinator runtime in your host. Actual runtime is reported only when authoritative metadata establishes it.
 
