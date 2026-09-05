@@ -1,0 +1,6 @@
+interface:
+  display_name: "Goblin Mini Astra"
+  short_description: "Quota-conscious Astra and Luna coordination"
+  default_prompt: "Use $goblin-mini-astra to complete this task with bounded Luna delegation, selective Astra escalation, and minimal repeated work."
+policy:
+  allow_implicit_invocation: true
