@@ -26,13 +26,13 @@ Keep role/design target, requested runtime, and actual runtime separate. Confirm
 | Scout | `gpt-5.6-luna` / `high` | Read-only questions have a bounded search area and observable answers |
 | Worker | `gpt-5.6-luna` / `xhigh` | Nontrivial implementation or debugging has a clear scope and acceptance criteria |
 | Deep Worker | `gpt-5.6-luna` / `max` | A difficult local problem has sufficient evidence, clear boundaries, and a concrete reason for deeper reasoning |
-| Escalation | `gpt-6-astra` / `high` | Architectural ambiguity, interacting components, conflicting evidence, or a diagnosed reasoning limitation warrants stronger reasoning |
+| Escalation | `gpt-6-astra` / `xhigh` | Architectural ambiguity, interacting components, conflicting evidence, or a diagnosed reasoning limitation warrants stronger reasoning |
 
 Use direct execution when briefing and checking a delegate would cost more than doing the remaining work. Conversely, the Coordinator should not complete substantial discovery or implementation and then delegate it again.
 
 Luna Max is selective, not the automatic destination for every hard task. Route known architectural or cross-component uncertainty directly to Astra when justified. There is no mandatory `High -> XHigh -> Max -> Astra` ladder, and task length alone does not justify escalation. Effort levels are not equivalent capability scores across models.
 
-Use the existing Coordinator for an escalation it can resolve with its current context and runtime. Request an Astra High delegate only when isolated investigation or execution materially helps and the host permits delegation. If the main effort cannot be changed, do not claim High was applied. An Astra delegate is not an obligatory review stage.
+Use the existing Coordinator for an escalation it can resolve with its current context and runtime. Request an Astra XHigh delegate only when isolated investigation or execution materially helps and the host permits delegation. If the main effort cannot be changed, do not claim XHigh was applied. An Astra delegate is not an obligatory review stage.
 
 ## Work from the remaining delta
 
@@ -73,7 +73,7 @@ An escalation brief preserves successful work and identifies the unresolved ques
 
 ## Optional GPT Pro decision gate
 
-GPT Pro remains an optional decision/audit consultation, separate from Astra routing. Astra, including Astra High, is not evidence that GPT Pro was consulted.
+GPT Pro remains an optional decision/audit consultation, separate from Astra routing. Astra, including Astra XHigh, is not evidence that GPT Pro was consulted.
 
 Use Pro only when explicitly requested or when the user approves a consultation for a material decision and a real Pro target is available. Invocation of this skill does not authorize an external message, upload, cross-task write, or task creation. Honor explicit authorization already present; do not ask for it again for the same consultation and target.
 
