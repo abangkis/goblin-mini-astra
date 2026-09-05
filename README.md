@@ -20,7 +20,7 @@ Small tasks stay with the Coordinator when delegation would add more work. There
 
 - Inspect only enough to give a delegate a useful boundary.
 - Carry relevant context and trusted evidence instead of full conversation history.
-- Use one leaf delegate at a time by default; parallel delegates require an explicit request.
+- Default to one leaf delegate; the Coordinator may use up to two concurrently for independent tasks when the expected benefit justifies additional quota and coordination overhead. Subagents cannot create subagents.
 - Reuse successful investigation and validation while their relevant inputs remain unchanged.
 - Escalate based on diagnosed uncertainty, not task length or an unexplained failure.
 - Verify the changed boundary without an automatic full Astra audit or redundant tests.

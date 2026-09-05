@@ -44,7 +44,7 @@ The Coordinator owns scope, authorization, integration, consequential operations
 
 ## Delegation budget and brief
 
-Default to at most one leaf subagent at a time. Use parallel delegates only when the user explicitly requests parallel work. Delegate only when there is a concrete bounded benefit and the host's delegation conditions are satisfied; a skill invocation alone is not a reason to spawn.
+Default to one leaf subagent. The Coordinator may use up to two leaf subagents concurrently when their tasks are independent and the expected time or quality benefit justifies the additional quota consumption and coordination overhead. This bounded parallel routing does not require a separate user request. Delegate only when there is a concrete bounded benefit and the host's delegation conditions are satisfied; a skill invocation alone is not a reason to spawn. Subagents must not create subagents.
 
 Request the selected model and effort explicitly through supported host controls. Prefer a compact standalone brief over copying the full conversation. With a host that disallows overrides on full-history forks, use a supported limited/no-history fork and supply the necessary context. Never silently substitute another model or effort. If a requested target is unavailable, disclose it and use the existing Coordinator when that remains sufficient; if the user required that target or the remaining problem exceeds this fallback, report the blocker.
 
@@ -80,6 +80,8 @@ Use Pro only when explicitly requested or when the user approves a consultation 
 Read [references/pro-decision-gate.md](references/pro-decision-gate.md) only when preparing or handling a Pro consultation. Ordinary execution does not need that reference. Pro advice must be checked against current evidence before implementation; material conflicts require reconciliation under that reference.
 
 ## Compact reporting
+
+Keep messages to other agents and final answers human-readable. Use proper spacing between words and numbers; do not sacrifice clarity for brevity.
 
 Report the outcome, changed delta, new validation, and any blocker or material residual risk. Explain a delegation or escalation reason once, not in every update. Avoid a fixed checklist of irrelevant fields.
 
