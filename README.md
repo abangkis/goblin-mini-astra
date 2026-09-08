@@ -38,10 +38,10 @@ The choice applies to each new task until explicitly changed:
 | Example request | This task | Saved default |
 | --- | --- | --- |
 | No budget instruction | Uses saved default | Unchanged |
-| `Budget task ini 2 juta token` | 2 million tokens | Unchanged |
-| `No budget untuk task ini` | No task token ceiling | Unchanged |
-| `Ubah default budget menjadi 10 juta token` | Existing task retains its budget unless asked otherwise | 10 million for future tasks |
-| `Ubah default menjadi no budget` | Existing task retains its budget unless asked otherwise | No ceiling for future tasks |
+| `Use a budget of 2 million tokens for this task` | 2 million tokens | Unchanged |
+| `No budget for this task` | No task token ceiling | Unchanged |
+| `Change the default budget to 10 million tokens` | Existing task retains its budget unless asked otherwise | 10 million for future tasks |
+| `Change the default to no budget` | Existing task retains its budget unless asked otherwise | No ceiling for future tasks |
 
 Follow-up messages and repeated skill invocations retain the current task budget and accumulated usage. A numeric override changes the task's total ceiling, not an additional allowance. Explicitly request use of the saved default again to clear a task override. `No budget` does not disable efficient routing, validation, or actual-usage reporting.
 

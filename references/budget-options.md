@@ -8,9 +8,9 @@ Run `python scripts/budget.py resolve` once when first activating the skill for 
 
 `needs_setup` means no saved preference exists. Ask in the user's language:
 
-> Budget default untuk setiap task Goblin Mini Astra: 1 juta, 5 juta, 10 juta token, atau masukkan angka sendiri?
+> What default token budget would you like for each Goblin Mini Astra task: 1 million, 5 million, 10 million, or a custom amount?
 
-Use suggested answers 1 juta, 5 juta, 10 juta when the input tool supports them; its free-text field accepts custom values. Do not preselect a policy on the user's behalf. Normalize an unambiguous answer such as `2 juta` to `2000000`; clarify ambiguous or nonpositive values. Wait for the answer before starting task execution. This setup also applies to simple tasks and first-use task overrides; retain the override while collecting the default. Editing/installing the skill does not activate it or request setup.
+Use suggested answers `1 million`, `5 million`, `10 million` when the input tool supports them; its free-text field accepts custom values. Do not preselect a policy on the user's behalf. Normalize an unambiguous answer such as `2 million` to `2000000`; clarify ambiguous or nonpositive values. Wait for the answer before starting task execution. This setup also applies to simple tasks and first-use task overrides; retain the override while collecting the default. Editing/installing the skill does not activate it or request setup.
 
 After selection, run `python scripts/budget.py set-default <integer>`, then resolve the current task again. Persist only the user's actual choice, never an illustrative number. Successful readback confirms saving. If writing is denied, report that the default was not saved, request the required host permission, and retain the selected value only for the current task if needed; never claim persistence succeeded. An unreadable or malformed file is `error`, not `needs_setup` or `no budget`: do not silently replace it or repeatedly retry. Ask for explicit repair/selection or a task-local override.
 
@@ -19,10 +19,10 @@ After selection, run `python scripts/budget.py set-default <integer>`, then reso
 | User request | Effective task budget | Saved default |
 | --- | --- | --- |
 | No task override | Saved default | Unchanged |
-| `Budget task ini 2 juta token` | 2,000,000 | Unchanged |
-| `No budget untuk task ini` | No task token ceiling | Unchanged |
-| `Ubah default menjadi 10 juta token` | New default for a new task | 10,000,000 |
-| `Ubah default menjadi no budget` | No ceiling by default for new tasks | Explicitly disabled (`null`) |
+| `Use a budget of 2 million tokens for this task` | 2,000,000 | Unchanged |
+| `No budget for this task` | No task token ceiling | Unchanged |
+| `Change the default to 10 million tokens` | New default for a new task | 10,000,000 |
+| `Change the default to no budget` | No ceiling by default for new tasks | Explicitly disabled (`null`) |
 | Change default plus a separate task budget | Explicit task override | New selected default |
 
 Only an explicit default-setting request invokes `set-default`. A plain budget or `no budget` always applies to the current task alone. To re-enable budgeting for a no-budget task, supply a numeric task override; to restore the saved default for that task, explicitly request it and resolve again without an override.
