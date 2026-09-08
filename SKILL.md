@@ -5,6 +5,8 @@ description: Coordinate quota-conscious Codex work with an Astra Coordinator, bo
 
 # Goblin Mini Astra
 
+Skill version: **v1**. Report the version from the skill instructions actually loaded for this task; do not infer it from a newer file or GitHub revision. When adopting updated instructions mid-task, read them before reporting their version. Maintainers increment this integer for each published skill update (`v2`, `v3`, ...), keeping this declaration and the footer consistent.
+
 Optimize Codex quota consumption while meeting the user's acceptance criteria. Use Astra to scope work and resolve important uncertainty; use Luna for substantial work that can be bounded clearly. Fewer agents, tokens, or checks are useful only when they reduce total work without leaving the outcome incomplete.
 
 This is a routing baseline, not a measured quota-saving guarantee. API prices, token counts, and reasoning labels do not establish Codex subscription quota charges. Do not embed price ratios or assumed quota multipliers.
@@ -103,4 +105,4 @@ For nontrivial tasks, add one compact budget line: initial budget (`not set` if 
 
 End active-mode responses with one line:
 
-`Active Goblin Mode: MINI-ASTRA | Execution footprint: <roles actually used>.`
+`Active Goblin Mode: MINI-ASTRA v1 | Execution footprint: <roles actually used>.`

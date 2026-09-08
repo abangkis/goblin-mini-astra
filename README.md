@@ -1,5 +1,7 @@
 # Goblin Mini Astra
 
+Current skill version: **v1**. Version numbering starts with this release; earlier revisions were unversioned. Increment to `v2`, `v3`, and so on for subsequent published skill updates, keeping the README, skill version declaration, and footer aligned.
+
 A Codex skill focused on conserving Codex quota while meeting task acceptance criteria. Astra scopes work and resolves important uncertainty; Luna handles substantial work with clear boundaries.
 
 Derived from [Goblin Mini Pro](https://github.com/abangkis/goblin-mini-pro), with quota-conscious routing and an optional authorized GPT Pro decision gate.
@@ -56,6 +58,14 @@ Complete the following task, conserving Codex quota while meeting these acceptan
 ```
 
 The active mode is `MINI-ASTRA`. A later explicit Goblin mode selection replaces it; asking to stop Goblin mode disables this routing. Discussing or editing the skill does not activate execution mode.
+
+Active task responses end with the loaded skill version, for example:
+
+```text
+Active Goblin Mode: MINI-ASTRA v1 | Execution footprint: Coordinator.
+```
+
+This identifies the skill instructions in use, not the model version. Existing tasks must load updated instructions before reporting a newer skill version.
 
 ## Optional GPT Pro consultation
 
