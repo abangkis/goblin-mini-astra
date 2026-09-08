@@ -71,6 +71,18 @@ After failure, distinguish code/logic problems from tooling, environment, permis
 
 An escalation brief preserves successful work and identifies the unresolved question, failed hypothesis, and evidence. It must not restart the whole task. Finish with one consolidated readback of the outcome and relevant outstanding risk.
 
+## Budget-aware decisions
+
+Skip budget bookkeeping for simple tasks unless requested. For nontrivial work, the Coordinator keeps a compact task-local checkpoint: initial budget if explicitly supplied, measurement baseline/scope, latest measured usage, verified progress, and remaining work. Reuse conversation/checkpoint state; do not create a budget-monitor agent, separate persistent memory system, or periodic polling loop.
+
+Prefer usage metadata already available. Make a fresh budget or account-quota read only when it could change a costly decision: another delegation, escalation, extended investigation, or a major phase. Reuse a recent snapshot when still relevant. Account for the read, context replay, reasoning, and reporting overhead; do not spend more measuring than the decision warrants. If metadata is unavailable, record that once and continue with bounded routing rather than repeated retrieval attempts.
+
+Compare consumption with verified progress. If usage grows without progress, diagnose and change approach; Astra Medium may avoid repeated Luna attempts. Low remaining account quota favors fewer optional investigations and marginal parallel tasks, but never removes required validation. Account-wide quota movement is a caution signal, not usage attributable to this task or a fixed token conversion.
+
+An explicit budget is a ceiling, not a spending target; there is no default numeric budget or automatic goal creation. Create a native goal only when the user explicitly requests one, and set a token budget only when explicitly provided. Reserve a task-appropriate portion for integration, validation, and handoff without a fixed percentage. Near a user-specified limit, prepare a checkpoint and seek a scope/budget decision before further work would exceed it. Do not claim incomplete work is complete or increase/reset a budget to continue. Distinguish a behavioral budget from a verified host-enforced hard cap.
+
+Aim to account for the Coordinator and all delegates from the task baseline, using documented counter semantics. Verify coverage before summing; avoid counting child usage or cached/reasoning components twice. Mark missing coverage as partial, and distinguish measured usage from estimates. Do not infer exact totals from answer length.
+
 ## Optional GPT Pro decision gate
 
 GPT Pro remains an optional decision/audit consultation, separate from Astra routing. Astra, including Astra Medium, is not evidence that GPT Pro was consulted.
@@ -87,7 +99,7 @@ Report the outcome, changed delta, new validation, and any blocker or material r
 
 When delegates or Pro were used, add a compact runtime/status line distinguishing requested profiles from verified actual metadata; report unavailable metadata as `unverified`. For direct work, disclose a known Coordinator mismatch or unverifiable runtime briefly on activation or change rather than repeating it each turn. Report Pro status when requested, considered, or used; do not manufacture consultation activity.
 
-Use available per-run usage metadata if an efficiency comparison is requested. Distinguish token usage from quota and account-wide limit movement from task-attributable consumption. Keep missing, partial, and zero distinct. Do not add usage polling or benchmarks to ordinary work; assess savings only from comparable tasks with accepted outcomes and attribution limits stated.
+For nontrivial tasks, add one compact budget line: initial budget (`not set` if absent), actual measured tokens (`unavailable` if absent), and coverage (`complete` or `partial`, with scope). Identify the measurement cutoff if final reporting or in-flight delegates are not yet counted. Omit this line for simple tasks unless requested. Keep estimates, missing data, and true zero distinct. Claim savings only from comparable accepted outcomes with attribution limits stated; do not run benchmarks merely to populate the report.
 
 End active-mode responses with one line:
 

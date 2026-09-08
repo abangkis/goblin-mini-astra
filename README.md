@@ -27,6 +27,14 @@ Small tasks stay with the Coordinator when delegation would add more work. There
 
 This is a routing baseline, not a measured savings guarantee. API pricing and token counts do not establish Codex subscription quota charges. Quota savings have not been benchmarked.
 
+## Budget awareness
+
+For nontrivial tasks, the Coordinator keeps a small task-local checkpoint of the initial budget, measured usage, verified progress, and remaining work. It reuses available metadata and checks fresh usage only when that could change a costly delegation, escalation, investigation, or phase decision. There is no dedicated monitoring agent or periodic polling, and checking costs are part of the tradeoff.
+
+Budgets are supplied by the user; there is no default token allowance or automatic goal creation. Reserve enough room for integration, validation, and handoff. Low account quota discourages optional work with marginal value, while required validation remains mandatory. A budget is not a spending target, and host-enforced stopping is not assumed.
+
+The final report for nontrivial work includes initial budget, measured actual tokens, and accounting coverage. Missing budgets are reported as `not set`; missing usage as `unavailable`; incomplete Coordinator/delegate coverage as `partial`. Task usage is not inferred from account-wide quota changes. Simple tasks skip this bookkeeping unless requested. Savings remain unmeasured until comparable outcomes and full overhead can be assessed.
+
 ## Install
 
 Ask Codex:
