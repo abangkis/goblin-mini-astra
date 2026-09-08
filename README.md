@@ -1,6 +1,6 @@
 # Goblin Mini Astra
 
-Current skill version: **v1**. Version numbering starts with this release; earlier revisions were unversioned. Increment to `v2`, `v3`, and so on for subsequent published skill updates, keeping the README, skill version declaration, and footer aligned.
+Current skill version: **v2**. This release adds persistent per-user budget defaults, first-use selection, task-only overrides, and `no budget`. Version numbering began at v1; increment the integer for subsequent published skill updates, keeping the README, skill declaration, and footer aligned.
 
 A Codex skill focused on conserving Codex quota while meeting task acceptance criteria. Astra scopes work and resolves important uncertainty; Luna handles substantial work with clear boundaries.
 
@@ -29,13 +29,33 @@ Small tasks stay with the Coordinator when delegation would add more work. There
 
 This is a routing baseline, not a measured savings guarantee. API pricing and token counts do not establish Codex subscription quota charges. Quota savings have not been benchmarked.
 
-## Budget awareness
+## Budget defaults and options
+
+On first use, Codex asks for a default: **1 million**, **5 million**, **10 million tokens**, or **your own positive amount**. No number is selected automatically. This one-time setup also applies to simple tasks. Python 3 is required for the bundled standard-library helper, which returns the setup status; Codex asks the question in conversation rather than opening a terminal prompt.
+
+The choice applies to each new task until explicitly changed:
+
+| Example request | This task | Saved default |
+| --- | --- | --- |
+| No budget instruction | Uses saved default | Unchanged |
+| `Budget task ini 2 juta token` | 2 million tokens | Unchanged |
+| `No budget untuk task ini` | No task token ceiling | Unchanged |
+| `Ubah default budget menjadi 10 juta token` | Existing task retains its budget unless asked otherwise | 10 million for future tasks |
+| `Ubah default menjadi no budget` | Existing task retains its budget unless asked otherwise | No ceiling for future tasks |
+
+Follow-up messages and repeated skill invocations retain the current task budget and accumulated usage. A numeric override changes the task's total ceiling, not an additional allowance. Explicitly request use of the saved default again to clear a task override. `No budget` does not disable efficient routing, validation, or actual-usage reporting.
+
+Preferences live in `$CODEX_HOME/skill-settings/goblin-mini-astra/budget.json` (fallback `~/.codex/skill-settings/goblin-mini-astra/budget.json`). They are local to the user/host, survive skill-folder upgrades, and are not included in this repository. Only an explicit default selection/change writes this file. Task overrides are resolved without modifying it.
+
+See [budget setup and helper commands](references/budget-options.md) for first-use behavior, custom values, errors, and precedence. The helper resolves policy; it does not count tokens or enforce a host-level hard stop. Installing or editing the skill does not start setup or choose your default.
+
+### Usage checks and reporting
 
 For nontrivial tasks, the Coordinator keeps a small task-local checkpoint of the initial budget, measured usage, verified progress, and remaining work. It reuses available metadata and checks fresh usage only when that could change a costly delegation, escalation, investigation, or phase decision. There is no dedicated monitoring agent or periodic polling, and checking costs are part of the tradeoff.
 
-Budgets are supplied by the user; there is no default token allowance or automatic goal creation. Reserve enough room for integration, validation, and handoff. Low account quota discourages optional work with marginal value, while required validation remains mandatory. A budget is not a spending target, and host-enforced stopping is not assumed.
+Reserve enough room for integration, validation, and handoff. Low account quota discourages optional work with marginal value, while required validation remains mandatory. A budget is not a spending target. Native goals are created only on explicit request, not automatically from the saved preference.
 
-The final report for nontrivial work includes initial budget, measured actual tokens, and accounting coverage. Missing budgets are reported as `not set`; missing usage as `unavailable`; incomplete Coordinator/delegate coverage as `partial`. Task usage is not inferred from account-wide quota changes. Simple tasks skip this bookkeeping unless requested. Savings remain unmeasured until comparable outcomes and full overhead can be assessed.
+The final report for nontrivial work includes initial effective budget and its source, measured actual tokens, and accounting coverage. Explicitly disabled ceilings are `no budget`; missing usage is `unavailable`; incomplete Coordinator/delegate coverage is `partial`. If the ceiling changes mid-task, retain the initial value and report the current ceiling too. Task usage is not inferred from account-wide quota changes. Simple tasks skip ongoing bookkeeping and budget reporting unless requested, while still inheriting the default. Savings remain unmeasured until comparable outcomes and full overhead can be assessed.
 
 ## Install
 
@@ -46,7 +66,7 @@ Use $skill-installer to install goblin-mini-astra from
 https://github.com/abangkis/goblin-mini-astra
 ```
 
-Alternatively, copy the skill folder to `~/.codex/skills/goblin-mini-astra/` (or the `skills` directory under your configured `CODEX_HOME`). The required package files are `SKILL.md`, `agents/openai.yaml`, and `references/pro-decision-gate.md`.
+Alternatively, copy the skill folder to `~/.codex/skills/goblin-mini-astra/` (or the `skills` directory under your configured `CODEX_HOME`). Include `SKILL.md`, `agents/openai.yaml`, both files in `references/`, and `scripts/budget.py`. Preserve the separate user-settings directory when updating the skill.
 
 ## Use
 
@@ -62,7 +82,7 @@ The active mode is `MINI-ASTRA`. A later explicit Goblin mode selection replaces
 Active task responses end with the loaded skill version, for example:
 
 ```text
-Active Goblin Mode: MINI-ASTRA v1 | Execution footprint: Coordinator.
+Active Goblin Mode: MINI-ASTRA v2 | Execution footprint: Coordinator.
 ```
 
 This identifies the skill instructions in use, not the model version. Existing tasks must load updated instructions before reporting a newer skill version.
@@ -75,7 +95,7 @@ Pro recommendations are checked against current evidence before implementation. 
 
 ## Validation status
 
-The initial skill passed restricted YAML structure, metadata, local-reference, and unfinished-scaffold checks. The official `quick_validate.py` could not run because PyYAML was unavailable. Routing was reviewed against representative cases but has not been independently runtime-tested or quota-benchmarked.
+Run helper behavior tests with `python -B -m unittest discover -s tests -v`. Tests use project-local isolated settings, covering first-use setup, saved presets/custom defaults, task overrides, no-budget behavior, invalid data, and persistence across processes. They do not alter personal preferences. The initial skill passed restricted structural checks; the official `quick_validate.py` was unavailable due to missing PyYAML. Routing has not been independently runtime-tested or quota-benchmarked.
 
 ## License
 

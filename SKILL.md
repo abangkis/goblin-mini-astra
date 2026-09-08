@@ -5,7 +5,7 @@ description: Coordinate quota-conscious Codex work with an Astra Coordinator, bo
 
 # Goblin Mini Astra
 
-Skill version: **v1**. Report the version from the skill instructions actually loaded for this task; do not infer it from a newer file or GitHub revision. When adopting updated instructions mid-task, read them before reporting their version. Maintainers increment this integer for each published skill update (`v2`, `v3`, ...), keeping this declaration and the footer consistent.
+Skill version: **v2**. Report the version from the skill instructions actually loaded for this task; do not infer it from a newer file or GitHub revision. When adopting updated instructions mid-task, read them before reporting their version. Maintainers increment this integer for each published skill update, keeping this declaration and the footer consistent.
 
 Optimize Codex quota consumption while meeting the user's acceptance criteria. Use Astra to scope work and resolve important uncertainty; use Luna for substantial work that can be bounded clearly. Fewer agents, tokens, or checks are useful only when they reduce total work without leaving the outcome incomplete.
 
@@ -73,15 +73,21 @@ After failure, distinguish code/logic problems from tooling, environment, permis
 
 An escalation brief preserves successful work and identifies the unresolved question, failed hypothesis, and evidence. It must not restart the whole task. Finish with one consolidated readback of the outcome and relevant outstanding risk.
 
+## Budget default and task overrides
+
+On first activation for each task, read [references/budget-options.md](references/budget-options.md) and run `scripts/budget.py resolve` from the loaded skill directory using Python 3. The helper reads per-user settings outside the skill folder. If no default exists, ask the user to choose 1 million, 5 million, 10 million tokens, or a custom positive amount, then save their actual selection with `set-default`. Wait for selection before task execution; do not invent a default. This setup applies even to simple tasks. The helper returns JSON; the Coordinator presents the question through conversation/input tools.
+
+Use the saved default unless the user supplies a task budget or says `no budget`. Those overrides apply only to this task and must not change the saved preference. Change the persistent default only when the user explicitly asks to change it; an explicit no-budget default is also supported. Preserve the effective budget and accumulated usage across follow-ups/reinvocations; default changes affect future tasks unless the user asks to apply them here. Read the reference for helper commands, errors, storage, and accounting semantics. Editing this skill does not activate budget setup.
+
 ## Budget-aware decisions
 
-Skip budget bookkeeping for simple tasks unless requested. For nontrivial work, the Coordinator keeps a compact task-local checkpoint: initial budget if explicitly supplied, measurement baseline/scope, latest measured usage, verified progress, and remaining work. Reuse conversation/checkpoint state; do not create a budget-monitor agent, separate persistent memory system, or periodic polling loop.
+After resolving budget policy, skip ongoing bookkeeping for simple tasks unless requested. For nontrivial work, the Coordinator keeps a compact task-local checkpoint: initial effective budget and source (saved default or task override), measurement baseline/scope, latest measured usage, verified progress, and remaining work. Reuse conversation/checkpoint state; do not create a budget-monitor agent, separate persistent memory system, or periodic polling loop.
 
 Prefer usage metadata already available. Make a fresh budget or account-quota read only when it could change a costly decision: another delegation, escalation, extended investigation, or a major phase. Reuse a recent snapshot when still relevant. Account for the read, context replay, reasoning, and reporting overhead; do not spend more measuring than the decision warrants. If metadata is unavailable, record that once and continue with bounded routing rather than repeated retrieval attempts.
 
 Compare consumption with verified progress. If usage grows without progress, diagnose and change approach; Astra Medium may avoid repeated Luna attempts. Low remaining account quota favors fewer optional investigations and marginal parallel tasks, but never removes required validation. Account-wide quota movement is a caution signal, not usage attributable to this task or a fixed token conversion.
 
-An explicit budget is a ceiling, not a spending target; there is no default numeric budget or automatic goal creation. Create a native goal only when the user explicitly requests one, and set a token budget only when explicitly provided. Reserve a task-appropriate portion for integration, validation, and handoff without a fixed percentage. Near a user-specified limit, prepare a checkpoint and seek a scope/budget decision before further work would exceed it. Do not claim incomplete work is complete or increase/reset a budget to continue. Distinguish a behavioral budget from a verified host-enforced hard cap.
+A numeric effective budget is a ceiling, not a spending target. `No budget` disables the task token ceiling, not quota-conscious routing or required validation. A saved preference does not itself authorize native goal creation; create one only when explicitly requested and use budget controls only as authorized and supported by the host. Reserve a task-appropriate portion for integration, validation, and handoff without a fixed percentage. Near the effective limit, prepare a checkpoint and seek a scope/budget decision before further work would exceed it. Do not claim incomplete work is complete or increase/reset a budget to continue. Distinguish a behavioral budget from a verified host-enforced hard cap.
 
 Aim to account for the Coordinator and all delegates from the task baseline, using documented counter semantics. Verify coverage before summing; avoid counting child usage or cached/reasoning components twice. Mark missing coverage as partial, and distinguish measured usage from estimates. Do not infer exact totals from answer length.
 
@@ -101,8 +107,8 @@ Report the outcome, changed delta, new validation, and any blocker or material r
 
 When delegates or Pro were used, add a compact runtime/status line distinguishing requested profiles from verified actual metadata; report unavailable metadata as `unverified`. For direct work, disclose a known Coordinator mismatch or unverifiable runtime briefly on activation or change rather than repeating it each turn. Report Pro status when requested, considered, or used; do not manufacture consultation activity.
 
-For nontrivial tasks, add one compact budget line: initial budget (`not set` if absent), actual measured tokens (`unavailable` if absent), and coverage (`complete` or `partial`, with scope). Identify the measurement cutoff if final reporting or in-flight delegates are not yet counted. Omit this line for simple tasks unless requested. Keep estimates, missing data, and true zero distinct. Claim savings only from comparable accepted outcomes with attribution limits stated; do not run benchmarks merely to populate the report.
+For nontrivial tasks, add one compact budget line: initial effective budget and source (`no budget` when explicitly disabled), actual measured tokens (`unavailable` if absent), and coverage (`complete` or `partial`, with scope). Include the current ceiling if changed mid-task; do not erase the initial value. Identify the measurement cutoff if final reporting or in-flight delegates are not yet counted. Omit this line for simple tasks unless requested. Keep unconfigured defaults, estimates, missing data, and true zero distinct. Claim savings only from comparable accepted outcomes with attribution limits stated; do not run benchmarks merely to populate the report.
 
 End active-mode responses with one line:
 
-`Active Goblin Mode: MINI-ASTRA v1 | Execution footprint: <roles actually used>.`
+`Active Goblin Mode: MINI-ASTRA v2 | Execution footprint: <roles actually used>.`
