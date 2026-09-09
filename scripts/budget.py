@@ -60,7 +60,9 @@ def main(argv=None):
                 value = args.task_budget if override else result['default_budget_tokens']
                 result.update(effective_budget_tokens=value,
                               source='task_override' if override else 'saved_default',
-                              mode='no_budget' if value is None else 'limited')
+                              mode='no_budget' if value is None else 'limited',
+                              native_budget_state='unchecked',
+                              usage_tokens=None)
         print(json.dumps(result))
         return 0
     except (OSError, ValueError) as exc:

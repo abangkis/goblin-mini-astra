@@ -5,7 +5,7 @@ description: Coordinate quota-conscious Codex work with an Astra Coordinator, bo
 
 # Goblin Mini Astra
 
-Skill version: **v2**. Report the version from the skill instructions actually loaded for this task; do not infer it from a newer file or GitHub revision. When adopting updated instructions mid-task, read them before reporting their version. Maintainers increment this integer for each published skill update, keeping this declaration and the footer consistent.
+Skill version: **v3**. Report the version from the skill instructions actually loaded for this task; do not infer it from a newer file or GitHub revision. When adopting updated instructions mid-task, read them before reporting their version. Maintainers increment this integer for each published skill update, keeping this declaration and the footer consistent.
 
 Optimize Codex quota consumption while meeting the user's acceptance criteria. Use Astra to scope work and resolve important uncertainty; use Luna for substantial work that can be bounded clearly. Fewer agents, tokens, or checks are useful only when they reduce total work without leaving the outcome incomplete.
 
@@ -81,9 +81,11 @@ Use the saved default unless the user supplies a task budget or says `no budget`
 
 ## Budget-aware decisions
 
+For nontrivial budgeted work, read [references/native-budget.md](references/native-budget.md) and establish native state before substantial execution: resolve preference, inspect `get_goal`, reuse a matching goal or obtain explicit authorization for `create_goal`, then verify the configured budget. A saved value is not native enforcement. If native setup is unavailable or mismatched, disclose the limitation and obtain a decision before proceeding under a preference-only budget. Follow the same reference for an existing native goal or an explicitly requested cap, even on a simple task. Do not create a goal merely because the skill was invoked.
+
 After resolving budget policy, skip ongoing bookkeeping for simple tasks unless requested. For nontrivial work, the Coordinator keeps a compact task-local checkpoint: initial effective budget and source (saved default or task override), measurement baseline/scope, latest measured usage, verified progress, and remaining work. Reuse conversation/checkpoint state; do not create a budget-monitor agent, separate persistent memory system, or periodic polling loop.
 
-Prefer usage metadata already available. Make a fresh budget or account-quota read only when it could change a costly decision: another delegation, escalation, extended investigation, or a major phase. Reuse a recent snapshot when still relevant. Account for the read, context replay, reasoning, and reporting overhead; do not spend more measuring than the decision warrants. If metadata is unavailable, record that once and continue with bounded routing rather than repeated retrieval attempts.
+Prefer usage metadata already available. Use `get_goal` for task usage at costly decision points and final readback; account quota is a separate signal. Reuse a recent snapshot when still relevant. Account for the read, context replay, reasoning, and reporting overhead; do not spend more measuring than the decision warrants. If metadata is unavailable, record the reason once and follow the agreed fallback rather than repeated retrieval attempts. Include the shared remaining budget and stopping condition in delegate briefs; never allocate the full remainder independently to both workers.
 
 Compare consumption with verified progress. If usage grows without progress, diagnose and change approach; Astra Medium may avoid repeated Luna attempts. Low remaining account quota favors fewer optional investigations and marginal parallel tasks, but never removes required validation. Account-wide quota movement is a caution signal, not usage attributable to this task or a fixed token conversion.
 
@@ -107,8 +109,8 @@ Report the outcome, changed delta, new validation, and any blocker or material r
 
 When delegates or Pro were used, add a compact runtime/status line distinguishing requested profiles from verified actual metadata; report unavailable metadata as `unverified`. For direct work, disclose a known Coordinator mismatch or unverifiable runtime briefly on activation or change rather than repeating it each turn. Report Pro status when requested, considered, or used; do not manufacture consultation activity.
 
-For nontrivial tasks, add one compact budget line: initial effective budget and source (`no budget` when explicitly disabled), actual measured tokens (`unavailable` if absent), and coverage (`complete` or `partial`, with scope). Include the current ceiling if changed mid-task; do not erase the initial value. Identify the measurement cutoff if final reporting or in-flight delegates are not yet counted. Omit this line for simple tasks unless requested. Keep unconfigured defaults, estimates, missing data, and true zero distinct. Claim savings only from comparable accepted outcomes with attribution limits stated; do not run benchmarks merely to populate the report.
+For nontrivial tasks, report initial budget/source, verified native state, measured tokens and scope, and coverage (`complete`, `partial`, or `unavailable`). Use one final goal read or authoritative completion report. Report a known goal-only count even when worker coverage is unknown; use `unavailable` with a reason only for missing measurements. Include a changed current cap and measurement cutoff without erasing the initial budget. Follow the native-budget reference's report format. Omit the line for simple tasks unless requested. Keep estimates and true zero distinct; do not run benchmarks just to populate the report or claim unmeasured savings.
 
 End active-mode responses with one line:
 
-`Active Goblin Mode: MINI-ASTRA v2 | Execution footprint: <roles actually used>.`
+`Active Goblin Mode: MINI-ASTRA v3 | Execution footprint: <roles actually used>.`

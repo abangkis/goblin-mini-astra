@@ -54,6 +54,14 @@ class BudgetTests(unittest.TestCase):
         self.assertEqual(self.run_cli('resolve', '--task-budget', '100')['effective_budget_tokens'], 100)
         self.assertIsNone(self.run_cli('get')['default_budget_tokens'])
 
+    def test_resolution_does_not_claim_native_configuration_or_measurement(self):
+        self.run_cli('set-default', '10000000')
+        for args in [('resolve',), ('resolve', '--task-budget', 'none')]:
+            data = self.run_cli(*args)
+            self.assertEqual(data['native_budget_state'], 'unchecked')
+            self.assertIsNone(data['usage_tokens'])
+        self.assertEqual(self.run_cli('get')['default_budget_tokens'], 10000000)
+
     def test_invalid_values_preserve_existing_settings(self):
         self.run_cli('set-default', '1000000')
         before = self.path.read_bytes()

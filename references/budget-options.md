@@ -1,4 +1,4 @@
-# Budget setup and options (v2)
+# Budget setup and options (v3)
 
 The helper uses Python 3's standard library. Run `scripts/budget.py` relative to the loaded skill directory. It returns JSON; the Coordinator asks the user through the available input tool or conversation. It never opens a terminal prompt, monitors usage, changes the model, or creates a native goal.
 
@@ -37,10 +37,10 @@ Store only `schema_version` and `default_budget_tokens` in `$CODEX_HOME/skill-se
 
 `get` reads the preference; `resolve` reads and applies a task override without writing; `set-default` writes and reads back the selected preference. `--config <path>` overrides storage for tests; do not use test paths as production defaults. Concurrent default writes use the last completed write; do not run competing preference updates.
 
-The script resolves policy only. It does not enforce a hard cap or count Coordinator/delegate tokens. Use authoritative usage metadata with verified coverage and no double counting. Create a native goal only when explicitly requested and supported; never create one just because a default exists. If unavailable, report a behavioral budget and partial/unavailable usage honestly.
+The script resolves policy only. Its `mode: limited` describes the requested policy, not enforcement: `native_budget_state: unchecked` and `usage_tokens: null` explicitly indicate that no native configuration or measurement has been verified. For nontrivial execution, follow [native budget integration](native-budget.md): inspect the goal, obtain explicit goal authorization when needed, verify its budget, and read scoped usage. Do not silently substitute a preference-only budget for a requested native cap.
 
 For nontrivial tasks report, for example:
 
-`Budget: 5,000,000 (saved default) | Actual: 820,000 tokens | Coverage: complete through last measurement.`
+`Budget: 5,000,000 (saved default) | Native: configured | Actual: 820,000 goal tokens | Coverage: partial; worker coverage unknown; through last measurement.`
 
-Use `task override` as source when appropriate, `no budget` for a disabled ceiling, and `unavailable` for missing usage. Simple tasks omit ongoing bookkeeping and the final budget line unless requested; they still perform first-use preference setup and inherit or override the policy.
+Use `task override` as source when appropriate and `no budget` for a disabled ceiling. Missing measurements require `unavailable` with the cause; `partial` means an actual scoped measurement exists but total coverage is incomplete. Simple tasks omit ongoing bookkeeping and the final budget line unless requested; they still perform first-use preference setup and inherit or override the policy. Existing native caps must be reconciled rather than assumed removed by `no budget`.

@@ -1,6 +1,6 @@
 # Goblin Mini Astra
 
-Current skill version: **v2**. This release adds persistent per-user budget defaults, first-use selection, task-only overrides, and `no budget`. Version numbering began at v1; increment the integer for subsequent published skill updates, keeping the README, skill declaration, and footer aligned.
+Current skill version: **v3**. This release connects budget routing to native goal inspection, authorized setup/readback, and scoped usage reporting. Persistent defaults, task-only overrides, and `no budget` remain supported. Increment the integer for subsequent published skill updates, keeping the README, skill declaration, and footer aligned.
 
 A Codex skill focused on conserving Codex quota while meeting task acceptance criteria. Astra scopes work and resolves important uncertainty; Luna handles substantial work with clear boundaries.
 
@@ -49,13 +49,17 @@ Preferences live in `$CODEX_HOME/skill-settings/goblin-mini-astra/budget.json` (
 
 See [budget setup and helper commands](references/budget-options.md) for first-use behavior, custom values, errors, and precedence. The helper resolves policy; it does not count tokens or enforce a host-level hard stop. Installing or editing the skill does not start setup or choose your default.
 
-### Usage checks and reporting
+### Native budget setup, usage checks, and reporting
+
+For nontrivial budgeted tasks, the Coordinator resolves the preference and reads native goal state. It reuses a matching goal; if none exists, it asks for an explicit request to start a native goal with the resolved budget, unless already authorized. Successful native readback is required before reporting `native configured`. A default preference alone is not enforcement. Unsupported setup or mismatched existing goals require a decision before proceeding under a preference-only policy.
+
+Native usage is read at consequential decisions and once for the final report, reusing available metadata. Existing goals and accumulated usage are preserved. Worker accounting is verified separately; known goal usage is reported even when total worker coverage is unknown. The helper explicitly returns `native_budget_state: unchecked` and no usage measurement; Codex performs native tool integration as described in [the native budget reference](references/native-budget.md).
 
 For nontrivial tasks, the Coordinator keeps a small task-local checkpoint of the initial budget, measured usage, verified progress, and remaining work. It reuses available metadata and checks fresh usage only when that could change a costly delegation, escalation, investigation, or phase decision. There is no dedicated monitoring agent or periodic polling, and checking costs are part of the tradeoff.
 
 Reserve enough room for integration, validation, and handoff. Low account quota discourages optional work with marginal value, while required validation remains mandatory. A budget is not a spending target. Native goals are created only on explicit request, not automatically from the saved preference.
 
-The final report for nontrivial work includes initial effective budget and its source, measured actual tokens, and accounting coverage. Explicitly disabled ceilings are `no budget`; missing usage is `unavailable`; incomplete Coordinator/delegate coverage is `partial`. If the ceiling changes mid-task, retain the initial value and report the current ceiling too. Task usage is not inferred from account-wide quota changes. Simple tasks skip ongoing bookkeeping and budget reporting unless requested, while still inheriting the default. Savings remain unmeasured until comparable outcomes and full overhead can be assessed.
+The final report for nontrivial work includes initial budget/source, native state, actual measured tokens with scope, and accounting coverage. Missing usage is `unavailable` with a reason; `partial` requires an existing scoped measurement. If the ceiling changes mid-task, retain the initial value and report the current ceiling too. Account quota is not task usage. Simple tasks omit routine bookkeeping unless requested, but existing native goals or requested native caps are still checked. Native configuration does not prove exact stopping or in-flight worker coverage. Savings remain unmeasured.
 
 ## Install
 
@@ -66,7 +70,7 @@ Use $skill-installer to install goblin-mini-astra from
 https://github.com/abangkis/goblin-mini-astra
 ```
 
-Alternatively, copy the skill folder to `~/.codex/skills/goblin-mini-astra/` (or the `skills` directory under your configured `CODEX_HOME`). Include `SKILL.md`, `agents/openai.yaml`, both files in `references/`, and `scripts/budget.py`. Preserve the separate user-settings directory when updating the skill.
+Alternatively, copy the skill folder to `~/.codex/skills/goblin-mini-astra/` (or the `skills` directory under your configured `CODEX_HOME`). Include `SKILL.md`, `agents/openai.yaml`, all files in `references/`, and `scripts/budget.py`. Preserve the separate user-settings directory when updating the skill.
 
 ## Use
 
@@ -82,7 +86,7 @@ The active mode is `MINI-ASTRA`. A later explicit Goblin mode selection replaces
 Active task responses end with the loaded skill version, for example:
 
 ```text
-Active Goblin Mode: MINI-ASTRA v2 | Execution footprint: Coordinator.
+Active Goblin Mode: MINI-ASTRA v3 | Execution footprint: Coordinator.
 ```
 
 This identifies the skill instructions in use, not the model version. Existing tasks must load updated instructions before reporting a newer skill version.
@@ -95,7 +99,7 @@ Pro recommendations are checked against current evidence before implementation. 
 
 ## Validation status
 
-Run helper behavior tests with `python -B -m unittest discover -s tests -v`. Tests use project-local isolated settings, covering first-use setup, saved presets/custom defaults, task overrides, no-budget behavior, invalid data, and persistence across processes. They do not alter personal preferences. The initial skill passed restricted structural checks; the official `quick_validate.py` was unavailable due to missing PyYAML. Routing has not been independently runtime-tested or quota-benchmarked.
+Run helper behavior tests with `python -B -m unittest discover -s tests -v`. Tests use project-local isolated settings, covering first-use setup, saved presets/custom defaults, task overrides, no-budget behavior, invalid data, persistence across processes, and no false claims of native measurement/configuration. They do not alter personal preferences or create native goals. Native goal control and aggregate worker enforcement require live host validation; these tests do not prove them. The initial skill passed restricted structural checks; the official `quick_validate.py` was unavailable due to missing PyYAML. Routing has not been independently runtime-tested or quota-benchmarked.
 
 ## License
 
