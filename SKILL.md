@@ -5,7 +5,7 @@ description: Coordinate quota-conscious Codex work with an Astra Coordinator, bo
 
 # Goblin Mini Astra
 
-Skill version: **v3**. Report the version from the skill instructions actually loaded for this task; do not infer it from a newer file or GitHub revision. When adopting updated instructions mid-task, read them before reporting their version. Maintainers increment this integer for each published skill update, keeping this declaration and the footer consistent.
+Skill version: **v4**. Report the version from the skill instructions actually loaded for this task; do not infer it from a newer file or GitHub revision. When adopting updated instructions mid-task, read them before reporting their version. Maintainers increment this integer for each published skill update, keeping this declaration and the footer consistent.
 
 Optimize Codex quota consumption while meeting the user's acceptance criteria. Use Astra to scope work and resolve important uncertainty; use Luna for substantial work that can be bounded clearly. Fewer agents, tokens, or checks are useful only when they reduce total work without leaving the outcome incomplete.
 
@@ -81,7 +81,7 @@ Use the saved default unless the user supplies a task budget or says `no budget`
 
 ## Budget-aware decisions
 
-For nontrivial budgeted work, read [references/native-budget.md](references/native-budget.md) and establish native state before substantial execution: resolve preference, inspect `get_goal`, reuse a matching goal or obtain explicit authorization for `create_goal`, then verify the configured budget. A saved value is not native enforcement. If native setup is unavailable or mismatched, disclose the limitation and obtain a decision before proceeding under a preference-only budget. Follow the same reference for an existing native goal or an explicitly requested cap, even on a simple task. Do not create a goal merely because the skill was invoked.
+The user's bundled-budget instruction requests native setup together with every numeric budget in this workflow, whether inherited from the saved default or supplied for this task. Read [references/native-budget.md](references/native-budget.md): resolve the budget, inspect `get_goal`, reuse a matching goal or create the requested native goal when no unfinished goal prevents it, and verify the configured budget. Do not ask a second confirmation for native setup. Apply this numeric-budget setup even to simple tasks. `No budget` requests neither a new native goal nor a native token budget. A saved value or request is not proof of enforcement; verify readback. If native tools are unavailable or an existing unfinished goal conflicts, report the actual limitation rather than asking redundant authorization. Ordinary work outside this selected workflow does not request goal creation.
 
 After resolving budget policy, skip ongoing bookkeeping for simple tasks unless requested. For nontrivial work, the Coordinator keeps a compact task-local checkpoint: initial effective budget and source (saved default or task override), measurement baseline/scope, latest measured usage, verified progress, and remaining work. Reuse conversation/checkpoint state; do not create a budget-monitor agent, separate persistent memory system, or periodic polling loop.
 
@@ -89,7 +89,7 @@ Prefer usage metadata already available. Use `get_goal` for task usage at costly
 
 Compare consumption with verified progress. If usage grows without progress, diagnose and change approach; Astra Medium may avoid repeated Luna attempts. Low remaining account quota favors fewer optional investigations and marginal parallel tasks, but never removes required validation. Account-wide quota movement is a caution signal, not usage attributable to this task or a fixed token conversion.
 
-A numeric effective budget is a ceiling, not a spending target. `No budget` disables the task token ceiling, not quota-conscious routing or required validation. A saved preference does not itself authorize native goal creation; create one only when explicitly requested and use budget controls only as authorized and supported by the host. Reserve a task-appropriate portion for integration, validation, and handoff without a fixed percentage. Near the effective limit, prepare a checkpoint and seek a scope/budget decision before further work would exceed it. Do not claim incomplete work is complete or increase/reset a budget to continue. Distinguish a behavioral budget from a verified host-enforced hard cap.
+A numeric effective budget is a ceiling, not a spending target. The bundled native setup request does not expand the task objective or authorize unrelated actions. `No budget` skips native setup; if a cap already exists, remove only that cap through supported controls while preserving usage, or disclose the host limitation. Keep quota-conscious routing and required validation. Reserve a task-appropriate portion for integration, validation, and handoff without a fixed percentage. Near the effective limit, prepare a checkpoint and seek a scope/budget decision before further work would exceed it. Do not claim incomplete work is complete or increase/reset a budget to continue. Distinguish a behavioral budget from a verified host-enforced hard cap.
 
 Aim to account for the Coordinator and all delegates from the task baseline, using documented counter semantics. Verify coverage before summing; avoid counting child usage or cached/reasoning components twice. Mark missing coverage as partial, and distinguish measured usage from estimates. Do not infer exact totals from answer length.
 
@@ -113,4 +113,4 @@ For nontrivial tasks, report initial budget/source, verified native state, measu
 
 End active-mode responses with one line:
 
-`Active Goblin Mode: MINI-ASTRA v3 | Execution footprint: <roles actually used>.`
+`Active Goblin Mode: MINI-ASTRA v4 | Execution footprint: <roles actually used>.`

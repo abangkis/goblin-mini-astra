@@ -1,6 +1,6 @@
 # Goblin Mini Astra
 
-Current skill version: **v3**. This release connects budget routing to native goal inspection, authorized setup/readback, and scoped usage reporting. Persistent defaults, task-only overrides, and `no budget` remain supported. Increment the integer for subsequent published skill updates, keeping the README, skill declaration, and footer aligned.
+Current skill version: **v4**. Numeric default/task budgets now include the request for native goal setup without a second confirmation. `No budget` skips native goal creation and token-budget setup. Persistent defaults, task-only overrides, and scoped usage reporting remain supported. Increment the integer for subsequent published skill updates, keeping the README, skill declaration, and footer aligned.
 
 A Codex skill focused on conserving Codex quota while meeting task acceptance criteria. Astra scopes work and resolves important uncertainty; Luna handles substantial work with clear boundaries.
 
@@ -51,13 +51,13 @@ See [budget setup and helper commands](references/budget-options.md) for first-u
 
 ### Native budget setup, usage checks, and reporting
 
-For nontrivial budgeted tasks, the Coordinator resolves the preference and reads native goal state. It reuses a matching goal; if none exists, it asks for an explicit request to start a native goal with the resolved budget, unless already authorized. Successful native readback is required before reporting `native configured`. A default preference alone is not enforcement. Unsupported setup or mismatched existing goals require a decision before proceeding under a preference-only policy.
+A numeric saved default or explicit task budget includes the user's request to start or reuse a native goal with that budget, without another confirmation. This applies to simple tasks too. The Coordinator inspects existing state, preserves unfinished goals/counters, and verifies native readback before reporting `native configured`. If the previous goal is complete, the new task can start its requested goal directly. `No budget` skips native goal creation and token-budget setup; removing an existing cap requires supported host controls, not clearing usage history. Unsupported setup or conflicting unfinished goals are reported as actual limitations, not renewed permission requests.
 
 Native usage is read at consequential decisions and once for the final report, reusing available metadata. Existing goals and accumulated usage are preserved. Worker accounting is verified separately; known goal usage is reported even when total worker coverage is unknown. The helper explicitly returns `native_budget_state: unchecked` and no usage measurement; Codex performs native tool integration as described in [the native budget reference](references/native-budget.md).
 
 For nontrivial tasks, the Coordinator keeps a small task-local checkpoint of the initial budget, measured usage, verified progress, and remaining work. It reuses available metadata and checks fresh usage only when that could change a costly delegation, escalation, investigation, or phase decision. There is no dedicated monitoring agent or periodic polling, and checking costs are part of the tradeoff.
 
-Reserve enough room for integration, validation, and handoff. Low account quota discourages optional work with marginal value, while required validation remains mandatory. A budget is not a spending target. Native goals are created only on explicit request, not automatically from the saved preference.
+Reserve enough room for integration, validation, and handoff. Low account quota discourages optional work with marginal value, while required validation remains mandatory. A budget is not a spending target. Numeric budgets and native setup are one bundled request; setup never expands authorization for the underlying work.
 
 The final report for nontrivial work includes initial budget/source, native state, actual measured tokens with scope, and accounting coverage. Missing usage is `unavailable` with a reason; `partial` requires an existing scoped measurement. If the ceiling changes mid-task, retain the initial value and report the current ceiling too. Account quota is not task usage. Simple tasks omit routine bookkeeping unless requested, but existing native goals or requested native caps are still checked. Native configuration does not prove exact stopping or in-flight worker coverage. Savings remain unmeasured.
 
@@ -86,7 +86,7 @@ The active mode is `MINI-ASTRA`. A later explicit Goblin mode selection replaces
 Active task responses end with the loaded skill version, for example:
 
 ```text
-Active Goblin Mode: MINI-ASTRA v3 | Execution footprint: Coordinator.
+Active Goblin Mode: MINI-ASTRA v4 | Execution footprint: Coordinator.
 ```
 
 This identifies the skill instructions in use, not the model version. Existing tasks must load updated instructions before reporting a newer skill version.

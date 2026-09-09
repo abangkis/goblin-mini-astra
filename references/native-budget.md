@@ -1,4 +1,4 @@
-# Native budget integration (v3)
+# Native budget integration (v4)
 
 Use native tools exposed by the current host, not shell access to internal databases or an invented API. The preference helper cannot install a native budget, count tokens, or establish enforcement. Keep configuration, measurement, and stopping guarantees separate.
 
@@ -7,14 +7,14 @@ Use native tools exposed by the current host, not shell access to internal datab
 1. Resolve the preference/task override and retain its source and original task baseline.
 2. Call `get_goal` (or the host's documented equivalent) once, unless fresh authoritative goal metadata is already available. Confirm the objective, status, configured token budget, measured usage, and remaining budget where exposed. Missing values are unknown, never zero.
 3. Reuse a matching active goal. If its objective, scope, or budget differs, report the mismatch before further substantial work. Never replace an unfinished goal or reset its counter to match a default. A mid-task increase changes the total ceiling, not a fresh allowance.
-4. If no goal exists and a numeric budget applies, use `create_goal` only after the user explicitly requests a native goal for this task. A saved default or bare skill invocation is not that request. If authorization is missing, ask once: "May I start a native goal for this task with a budget of <N> tokens?" Wait for the answer before budget-dependent execution. Reuse explicit authorization already given for this objective and budget. If the user declines, proceed only under their chosen preference-only/no-budget policy and label it accordingly.
+4. The user's bundled-budget instruction requests native goal setup whenever this workflow runs with a saved numeric default or an explicit numeric task budget. Do not ask a separate confirmation to create that native goal. If no goal exists, or the previous goal is complete, use `create_goal` with the current authorized task objective and resolved token budget. Reuse the user's standing instruction; do not treat each new task as requiring renewed budget consent. Do not replace an unfinished/inactive goal merely to restart its counter: use supported continuation controls or report the concrete conflict. A workflow without a numeric budget does not request goal creation, and ordinary tasks outside this selected workflow do not inherit this request.
 5. After authorized creation, read back with `get_goal` unless the creation result already authoritatively verifies the objective and budget. Only then report `native configured`. A requested value without successful readback is `unverified`, not configured.
 
 For goal changes, budget removal, pause, or resume, use only supported host controls and explicit user authorization. The current `update_goal` tool controls completion/blockage, not budgets or pausing. Never use false completion/blockage to simulate a budget stop, clear an active goal, or bypass a cap. Do not manipulate app state files as a fallback.
 
-With `no budget`, do not create a goal merely to obtain accounting. If a native capped goal already exists, report the conflict: the helper's override has not removed its cap. Resolve through supported controls/user action before promising unlimited task execution.
+With `no budget`, do not create a native goal or set a native token budget, including merely to obtain accounting. The override requests removal of the task cap if one is already active; use supported controls without a redundant permission question while preserving the objective and usage history. If removal is unsupported, report that the existing cap remains and the exact user action needed. Never claim the helper removed a native cap or clear the goal/counter as a workaround.
 
-If native tools are absent, fail, or cannot configure the requested state, disclose `preference only; native enforcement inactive/unverified` and the specific reason. Ask whether to proceed under that limitation or wait for native setup; do not silently continue a task represented as budget-limited. Retain progress and evidence. Simple tasks skip the machinery unless a native cap is explicitly requested; do not present their inherited preference as verified enforcement.
+If native tools are absent, fail, or cannot configure the requested state, disclose `preference only; native enforcement inactive/unverified` and the specific reason. Ask whether to proceed under that limitation or wait for native setup; this is a real capability decision, not renewed permission for already-requested native setup. Retain progress and evidence. A numeric budget requests setup even for a simple task; simple tasks may still omit ongoing bookkeeping and the final budget line.
 
 ## Measure only when it changes a decision
 

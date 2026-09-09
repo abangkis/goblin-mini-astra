@@ -60,6 +60,7 @@ class BudgetTests(unittest.TestCase):
             data = self.run_cli(*args)
             self.assertEqual(data['native_budget_state'], 'unchecked')
             self.assertIsNone(data['usage_tokens'])
+            self.assertEqual(data['native_goal_requested'], data['effective_budget_tokens'] is not None)
         self.assertEqual(self.run_cli('get')['default_budget_tokens'], 10000000)
 
     def test_invalid_values_preserve_existing_settings(self):

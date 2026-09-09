@@ -1,4 +1,4 @@
-# Budget setup and options (v3)
+# Budget setup and options (v4)
 
 The helper uses Python 3's standard library. Run `scripts/budget.py` relative to the loaded skill directory. It returns JSON; the Coordinator asks the user through the available input tool or conversation. It never opens a terminal prompt, monitors usage, changes the model, or creates a native goal.
 
@@ -8,7 +8,7 @@ Run `python scripts/budget.py resolve` once when first activating the skill for 
 
 `needs_setup` means no saved preference exists. Ask in the user's language:
 
-> What default token budget would you like for each Goblin Mini Astra task: 1 million, 5 million, 10 million, or a custom amount?
+> What default token budget would you like for each Goblin Mini Astra task: 1 million, 5 million, 10 million, or a custom amount? A numeric budget includes native goal setup without another confirmation.
 
 Use suggested answers `1 million`, `5 million`, `10 million` when the input tool supports them; its free-text field accepts custom values. Do not preselect a policy on the user's behalf. Normalize an unambiguous answer such as `2 million` to `2000000`; clarify ambiguous or nonpositive values. Wait for the answer before starting task execution. This setup also applies to simple tasks and first-use task overrides; retain the override while collecting the default. Editing/installing the skill does not activate it or request setup.
 
@@ -37,7 +37,7 @@ Store only `schema_version` and `default_budget_tokens` in `$CODEX_HOME/skill-se
 
 `get` reads the preference; `resolve` reads and applies a task override without writing; `set-default` writes and reads back the selected preference. `--config <path>` overrides storage for tests; do not use test paths as production defaults. Concurrent default writes use the last completed write; do not run competing preference updates.
 
-The script resolves policy only. Its `mode: limited` describes the requested policy, not enforcement: `native_budget_state: unchecked` and `usage_tokens: null` explicitly indicate that no native configuration or measurement has been verified. For nontrivial execution, follow [native budget integration](native-budget.md): inspect the goal, obtain explicit goal authorization when needed, verify its budget, and read scoped usage. Do not silently substitute a preference-only budget for a requested native cap.
+The script resolves policy only. `native_goal_requested: true` for numeric defaults/overrides expresses the bundled workflow request; `false` for `no budget` skips native setup. Neither value proves execution: `native_budget_state: unchecked` and `usage_tokens: null` mean no native configuration or measurement has been verified. Follow [native budget integration](native-budget.md): inspect the goal, apply the already-requested numeric budget without a second confirmation, verify it, and read scoped usage. Do not silently substitute a preference-only budget for a requested native cap.
 
 For nontrivial tasks report, for example:
 
