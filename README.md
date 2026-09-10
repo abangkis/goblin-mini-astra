@@ -1,6 +1,6 @@
 # Goblin Mini Astra
 
-Current skill version: **v5**. Numeric default/task budgets now include the request for native goal setup without a second confirmation. `No budget` skips native goal creation and token-budget setup. Persistent defaults, task-only overrides, and scoped usage reporting remain supported. Increment the integer for subsequent published skill updates, keeping the README, skill declaration, and footer aligned.
+Current skill version: **v4**. Numeric default/task budgets now include the request for native goal setup without a second confirmation. `No budget` skips native goal creation and token-budget setup. Persistent defaults, task-only overrides, and scoped usage reporting remain supported. Increment the integer when skill behavior changes, keeping the README, skill declaration, and footer aligned. Documentation-only changes do not require a version increment.
 
 A Codex skill focused on conserving Codex quota while meeting task acceptance criteria. Astra scopes work and resolves important uncertainty; Luna handles substantial work with clear boundaries.
 
@@ -88,7 +88,7 @@ The active mode is `MINI-ASTRA`. A later explicit Goblin mode selection replaces
 Active task responses end with the loaded skill version, for example:
 
 ```text
-Active Goblin Mode: MINI-ASTRA v5 | Execution footprint: Coordinator.
+Active Goblin Mode: MINI-ASTRA v4 | Execution footprint: Coordinator.
 ```
 
 This identifies the skill instructions in use, not the model version. Existing tasks must load updated instructions before reporting a newer skill version.
