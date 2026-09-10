@@ -1,6 +1,6 @@
 # Goblin Mini Astra
 
-Current skill version: **v4**. Numeric default/task budgets now include the request for native goal setup without a second confirmation. `No budget` skips native goal creation and token-budget setup. Persistent defaults, task-only overrides, and scoped usage reporting remain supported. Increment the integer for subsequent published skill updates, keeping the README, skill declaration, and footer aligned.
+Current skill version: **v5**. Numeric default/task budgets now include the request for native goal setup without a second confirmation. `No budget` skips native goal creation and token-budget setup. Persistent defaults, task-only overrides, and scoped usage reporting remain supported. Increment the integer for subsequent published skill updates, keeping the README, skill declaration, and footer aligned.
 
 A Codex skill focused on conserving Codex quota while meeting task acceptance criteria. Astra scopes work and resolves important uncertainty; Luna handles substantial work with clear boundaries.
 
@@ -55,6 +55,8 @@ A numeric saved default or explicit task budget includes the user's request to s
 
 Native usage is read at consequential decisions and once for the final report, reusing available metadata. Existing goals and accumulated usage are preserved. Worker accounting is verified separately; known goal usage is reported even when total worker coverage is unknown. The helper explicitly returns `native_budget_state: unchecked` and no usage measurement; Codex performs native tool integration as described in [the native budget reference](references/native-budget.md).
 
+For a shorter explanation aimed at users, including what happens when the budget is close to being reached or has been reached, read [How Goblin Mini Astra budgeting works](references/budget-behavior.md).
+
 For nontrivial tasks, the Coordinator keeps a small task-local checkpoint of the initial budget, measured usage, verified progress, and remaining work. It reuses available metadata and checks fresh usage only when that could change a costly delegation, escalation, investigation, or phase decision. There is no dedicated monitoring agent or periodic polling, and checking costs are part of the tradeoff.
 
 Reserve enough room for integration, validation, and handoff. Low account quota discourages optional work with marginal value, while required validation remains mandatory. A budget is not a spending target. Numeric budgets and native setup are one bundled request; setup never expands authorization for the underlying work.
@@ -86,7 +88,7 @@ The active mode is `MINI-ASTRA`. A later explicit Goblin mode selection replaces
 Active task responses end with the loaded skill version, for example:
 
 ```text
-Active Goblin Mode: MINI-ASTRA v4 | Execution footprint: Coordinator.
+Active Goblin Mode: MINI-ASTRA v5 | Execution footprint: Coordinator.
 ```
 
 This identifies the skill instructions in use, not the model version. Existing tasks must load updated instructions before reporting a newer skill version.
