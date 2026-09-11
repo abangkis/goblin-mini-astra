@@ -8,7 +8,7 @@ GPT Pro advises; Codex retains responsibility for repository changes, execution,
 
 Before sending anything, establish a real callable/selectable Pro target and the user's explicit authorization for the consultation, target, and material being transferred. Reuse valid authorization already given. Do not create a task, send a cross-task/external message, or upload source merely because a Pro gate would be helpful. Prefer an authorized existing target or a manual brief. Exclude credentials, secrets, unrelated source, and unnecessary personal data.
 
-If Pro is optional and unavailable or not authorized, continue normal routing with transparent status. If the user requires Pro and no target is available, prepare a manual handoff and pause the dependent execution; do not substitute Astra or Luna. Independent authorized work may continue when it cannot pre-empt the required decision.
+If Pro is optional and unavailable or not authorized, continue normal routing with transparent status. If the user requires Pro and no target is available, prepare a manual handoff and pause the dependent execution; do not substitute Sol, Astra, or Luna. Independent authorized work may continue when it cannot pre-empt the required decision.
 
 ## Minimal handoff records
 

@@ -1,13 +1,13 @@
 ---
 name: goblin-mini-astra
-description: Coordinate quota-conscious Codex work with an Astra Coordinator, bounded Luna delegates, selective Astra escalation, and optional authorized GPT Pro consultation. Use when the user selects Goblin Mini Astra or its active mode continues in the current task. Discussing, creating, or reviewing this skill does not activate its execution mode.
+description: Coordinate quota-conscious Codex work with a Sol Medium Coordinator, bounded Luna workers, Astra Low investigative execution, selective Astra Medium escalation, and optional authorized GPT Pro consultation. Use when the user selects Goblin Mini Astra or its active mode continues in the current task. Discussing, creating, or reviewing this skill does not activate its execution mode.
 ---
 
 # Goblin Mini Astra
 
-Skill version: **v4**. Report the version from the skill instructions actually loaded for this task; do not infer it from a newer file or GitHub revision. When adopting updated instructions mid-task, read them before reporting their version. Maintainers increment this integer when the skill behavior changes, keeping this declaration and the footer consistent. Documentation-only changes do not require a version increment.
+Skill version: **v5**. Report the version from the skill instructions actually loaded for this task; do not infer it from a newer file or GitHub revision. When adopting updated instructions mid-task, read them before reporting their version. Maintainers increment this integer when the skill behavior changes, keeping this declaration and the footer consistent. Documentation-only changes do not require a version increment.
 
-Optimize Codex quota consumption while meeting the user's acceptance criteria. Use Astra to scope work and resolve important uncertainty; use Luna for substantial work that can be bounded clearly. Fewer agents, tokens, or checks are useful only when they reduce total work without leaving the outcome incomplete.
+Optimize Codex quota consumption while meeting the user's acceptance criteria. Use Sol Medium to coordinate, Luna for predictable bounded work, and Astra Low to own uncertain execution. Judge routing by cost or attributable quota per accepted outcome, including handoffs, review, and retries; fewer tokens alone do not establish better value. Fewer agents, tokens, or checks are useful only when they reduce total work without leaving the outcome incomplete.
 
 This is a routing baseline, not a measured quota-saving guarantee. API prices, token counts, and reasoning labels do not establish Codex subscription quota charges. Do not embed price ratios or assumed quota multipliers.
 
@@ -15,7 +15,7 @@ This is a routing baseline, not a measured quota-saving guarantee. API prices, t
 
 An explicit `$goblin-mini-astra` invocation or selection activates `MINI-ASTRA` for subsequent work in the current task. The latest explicit Goblin mode selection or trustworthy active marker wins. Stop this routing when the user stops Goblin mode or selects another Goblin mode. Do not combine inactive routing policies. If multiple modes are requested without a clear selection, clarify before delegating. If the active mode becomes uncertain after compaction, continue ordinary nondelegated work where possible and clarify before applying this routing.
 
-The Coordinator's design target is `gpt-6-astra` / `low`. A skill cannot change the running main task's model or effort. Respect a user-selected runtime; disclose a mismatch with the target once rather than pretending to switch it. Never open a new task merely to obtain the preferred Coordinator.
+The Coordinator's design target is `gpt-5.6-sol` / `medium`. A skill cannot change the running main task's model or effort. Respect a user-selected runtime; disclose a mismatch with the target once rather than pretending to switch it. Never open a new task merely to obtain the preferred Coordinator.
 
 Keep role/design target, requested runtime, and actual runtime separate. Confirm actual provider/model/effort only from authoritative host or response metadata; otherwise mark the missing information `unverified`. Successful work and requested overrides are not proof of the runtime used.
 
@@ -23,18 +23,19 @@ Keep role/design target, requested runtime, and actual runtime separate. Confirm
 
 | Role or situation | Requested model / effort | Route when |
 | --- | --- | --- |
-| Coordinator | `gpt-6-astra` / `low` design target | Scope, routing, user communication, integration, and final acceptance |
+| Coordinator | `gpt-5.6-sol` / `medium` design target | Scope, routing, user communication, integration, and final acceptance |
 | Direct execution | Existing Coordinator | Work is small, clear, already understood, or a continuation of verified work |
 | Scout | `gpt-5.6-luna` / `high` | Read-only questions have a bounded search area and observable answers |
-| Worker | `gpt-5.6-luna` / `xhigh` | Nontrivial implementation or debugging has a clear scope and acceptance criteria |
+| Routine Worker | `gpt-5.6-luna` / `xhigh` | Implement a clear solution with explicit acceptance criteria |
 | Deep Worker | `gpt-5.6-luna` / `max` | A difficult local problem has sufficient evidence, clear boundaries, and a concrete reason for deeper reasoning |
-| Escalation | `gpt-6-astra` / `medium` | Architectural ambiguity, interacting components, conflicting evidence, or a diagnosed reasoning limitation warrants stronger reasoning |
+| Investigative Worker | `gpt-6-astra` / `low` | Own an uncertain bounded problem through diagnosis, implementation, and targeted validation |
+| Escalation Worker | `gpt-6-astra` / `medium` | Architectural ambiguity, interacting components, conflicting evidence, or a diagnosed reasoning limitation warrants stronger reasoning |
 
 Use direct execution when briefing and checking a delegate would cost more than doing the remaining work. Conversely, the Coordinator should not complete substantial discovery or implementation and then delegate it again.
 
-Luna Max is selective, not the automatic destination for every hard task. Route known architectural or cross-component uncertainty directly to Astra when justified. There is no mandatory `High -> XHigh -> Max -> Astra` ladder, and task length alone does not justify escalation. Effort levels are not equivalent capability scores across models.
+Choose by uncertainty and ownership, not task size alone. An agreed endpoint implementation fits Luna XHigh; diagnosing and fixing intermittent synchronization loss can go directly to Astra Low. Let the Investigative Worker finish its bounded assignment instead of adding a routine handoff to Luna or repeating discovery in Sol. Keep Luna Max selective for difficult local problems with clear boundaries; prefer it only when evidence or task fit supports its value over Astra Low. There is no mandatory model/effort ladder, and task length alone does not justify escalation. Effort labels are not equivalent capability scores across models.
 
-Use the existing Coordinator for an escalation it can resolve with its current context and runtime. Request an Astra Medium delegate only when isolated investigation or execution materially helps and the host permits delegation. If the main effort cannot be changed, do not claim Medium was applied. An Astra delegate is not an obligatory review stage.
+Use the existing Coordinator for a small question it can resolve with current evidence. Assign architectural uncertainty, conflicting evidence, or a diagnosed limitation to the Astra Medium Escalation Worker when delegation is justified and permitted. Pass only the unresolved problem and reusable evidence. A separable decision-only consultation uses this same role, not a new permanent reviewer. Sol reviews relevant changes and evidence without repeating the worker investigation; Astra review is not an obligatory stage. Do not describe Sol Medium as Astra Medium.
 
 ## Work from the remaining delta
 
@@ -115,4 +116,4 @@ For nontrivial tasks, report initial budget/source, verified native state, measu
 
 End active-mode responses with one line:
 
-`Active Goblin Mode: MINI-ASTRA v4 | Execution footprint: <roles actually used>.`
+`Active Goblin Mode: MINI-ASTRA v5 | Execution footprint: <roles actually used>.`
