@@ -1,6 +1,6 @@
 # Goblin Mini Astra
 
-Current skill version: **v5**. Sol Medium coordinates Luna workers and Astra Low investigative execution, with Astra Medium escalation. Numeric default/task budgets continue to include native goal setup without a second confirmation. `No budget` skips native goal creation and token-budget setup. Persistent defaults, task-only overrides, and scoped usage reporting remain supported. Increment the integer when skill behavior changes, keeping the README, skill declaration, and footer aligned. Documentation-only changes do not require a version increment.
+Current skill version: **v6**. GPT-6 Sol Medium coordinates GPT-6 Luna workers and Astra Low investigative execution, with Astra Medium escalation. Numeric default/task budgets continue to include native goal setup without a second confirmation. `No budget` skips native goal creation and token-budget setup. Persistent defaults, task-only overrides, and scoped usage reporting remain supported. Increment the integer when skill behavior changes, keeping the README, skill declaration, and footer aligned. Documentation-only changes do not require a version increment.
 
 A Codex skill focused on conserving Codex quota while meeting task acceptance criteria. Sol Medium coordinates; Luna handles predictable bounded work; Astra Low owns uncertain assignments through diagnosis, implementation, and validation. Routing targets cost or attributable quota per accepted outcome, including retries and review, rather than token count alone.
 
@@ -10,10 +10,10 @@ Derived from [Goblin Mini Pro](https://github.com/abangkis/goblin-mini-pro), wit
 
 | Role | Model / reasoning design target | Purpose |
 | --- | --- | --- |
-| Coordinator | GPT-5.6 Sol / Medium | Scope, routing, integration, and final acceptance |
-| Scout | GPT-5.6 Luna / High | Bounded read-only investigation |
-| Routine Worker | GPT-5.6 Luna / XHigh | Implementation and debugging with clear acceptance criteria |
-| Deep Worker | GPT-5.6 Luna / Max | Selectively address difficult, well-defined local problems |
+| Coordinator | GPT-6 Sol / Medium | Scope, routing, integration, and final acceptance |
+| Scout | GPT-6 Luna / High | Bounded read-only investigation |
+| Routine Worker | GPT-6 Luna / XHigh | Implementation and debugging with clear acceptance criteria |
+| Deep Worker | GPT-6 Luna / Max | Selectively address difficult, well-defined local problems |
 | Investigative Worker | GPT-6 Astra / Low | Own uncertain bounded work end to end |
 | Escalation Worker | GPT-6 Astra / Medium | Resolve architectural ambiguity or interacting components |
 
@@ -23,7 +23,7 @@ Small tasks stay with the Coordinator when delegation would add more work. There
 
 Send an agreed endpoint implementation to Luna XHigh. An intermittent synchronization bug with an unknown cause can go directly to Astra Low, which owns diagnosis, the fix, and targeted validation. Luna Max remains selective for difficult but well-defined local work; it is not an automatic step before Astra. Use Astra Medium for consequential architectural uncertainty, conflicting evidence, or an unresolved limitation, including a small decision-only consultation when separable. Sol accepts the relevant diff and evidence without duplicating the investigation.
 
-Select **Sol Medium** as the main task runtime in Codex to match the Coordinator profile. Updating this skill does not switch an existing task model. All workers share the task budget, with one worker by default, at most two independent workers concurrently, and no worker-created subagents. The budget helper and native goal flow are unchanged. Relative cost effectiveness of these routes has not been benchmarked.
+Select **GPT-6 Sol Medium** as the main task runtime in Codex to match the Coordinator profile. Updating this skill does not switch an existing task model. All workers share the task budget, with one worker by default, at most two independent workers concurrently, and no worker-created subagents. The budget helper and native goal flow are unchanged. Relative cost effectiveness of these routes has not been benchmarked.
 
 ## Quota-conscious workflow
 
@@ -95,7 +95,7 @@ The active mode is `MINI-ASTRA`. A later explicit Goblin mode selection replaces
 Active task responses end with the loaded skill version, for example:
 
 ```text
-Active Goblin Mode: MINI-ASTRA v5 | Execution footprint: Coordinator.
+Active Goblin Mode: MINI-ASTRA v6 | Execution footprint: Coordinator.
 ```
 
 This identifies the skill instructions in use, not the model version. Existing tasks must load updated instructions before reporting a newer skill version.

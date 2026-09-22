@@ -5,7 +5,7 @@ description: Coordinate quota-conscious Codex work with a Sol Medium Coordinator
 
 # Goblin Mini Astra
 
-Skill version: **v5**. Report the version from the skill instructions actually loaded for this task; do not infer it from a newer file or GitHub revision. When adopting updated instructions mid-task, read them before reporting their version. Maintainers increment this integer when the skill behavior changes, keeping this declaration and the footer consistent. Documentation-only changes do not require a version increment.
+Skill version: **v6**. Report the version from the skill instructions actually loaded for this task; do not infer it from a newer file or GitHub revision. When adopting updated instructions mid-task, read them before reporting their version. Maintainers increment this integer when the skill behavior changes, keeping this declaration and the footer consistent. Documentation-only changes do not require a version increment.
 
 Optimize Codex quota consumption while meeting the user's acceptance criteria. Use Sol Medium to coordinate, Luna for predictable bounded work, and Astra Low to own uncertain execution. Judge routing by cost or attributable quota per accepted outcome, including handoffs, review, and retries; fewer tokens alone do not establish better value. Fewer agents, tokens, or checks are useful only when they reduce total work without leaving the outcome incomplete.
 
@@ -15,7 +15,7 @@ This is a routing baseline, not a measured quota-saving guarantee. API prices, t
 
 An explicit `$goblin-mini-astra` invocation or selection activates `MINI-ASTRA` for subsequent work in the current task. The latest explicit Goblin mode selection or trustworthy active marker wins. Stop this routing when the user stops Goblin mode or selects another Goblin mode. Do not combine inactive routing policies. If multiple modes are requested without a clear selection, clarify before delegating. If the active mode becomes uncertain after compaction, continue ordinary nondelegated work where possible and clarify before applying this routing.
 
-The Coordinator's design target is `gpt-5.6-sol` / `medium`. A skill cannot change the running main task's model or effort. Respect a user-selected runtime; disclose a mismatch with the target once rather than pretending to switch it. Never open a new task merely to obtain the preferred Coordinator.
+The Coordinator's design target is `gpt-6-sol` / `medium`. A skill cannot change the running main task's model or effort. Respect a user-selected runtime; disclose a mismatch with the target once rather than pretending to switch it. Never open a new task merely to obtain the preferred Coordinator.
 
 Keep role/design target, requested runtime, and actual runtime separate. Confirm actual provider/model/effort only from authoritative host or response metadata; otherwise mark the missing information `unverified`. Successful work and requested overrides are not proof of the runtime used.
 
@@ -23,11 +23,11 @@ Keep role/design target, requested runtime, and actual runtime separate. Confirm
 
 | Role or situation | Requested model / effort | Route when |
 | --- | --- | --- |
-| Coordinator | `gpt-5.6-sol` / `medium` design target | Scope, routing, user communication, integration, and final acceptance |
+| Coordinator | `gpt-6-sol` / `medium` design target | Scope, routing, user communication, integration, and final acceptance |
 | Direct execution | Existing Coordinator | Work is small, clear, already understood, or a continuation of verified work |
-| Scout | `gpt-5.6-luna` / `high` | Read-only questions have a bounded search area and observable answers |
-| Routine Worker | `gpt-5.6-luna` / `xhigh` | Implement a clear solution with explicit acceptance criteria |
-| Deep Worker | `gpt-5.6-luna` / `max` | A difficult local problem has sufficient evidence, clear boundaries, and a concrete reason for deeper reasoning |
+| Scout | `gpt-6-luna` / `high` | Read-only questions have a bounded search area and observable answers |
+| Routine Worker | `gpt-6-luna` / `xhigh` | Implement a clear solution with explicit acceptance criteria |
+| Deep Worker | `gpt-6-luna` / `max` | A difficult local problem has sufficient evidence, clear boundaries, and a concrete reason for deeper reasoning |
 | Investigative Worker | `gpt-6-astra` / `low` | Own an uncertain bounded problem through diagnosis, implementation, and targeted validation |
 | Escalation Worker | `gpt-6-astra` / `medium` | Architectural ambiguity, interacting components, conflicting evidence, or a diagnosed reasoning limitation warrants stronger reasoning |
 
@@ -116,4 +116,4 @@ For nontrivial tasks, report initial budget/source, verified native state, measu
 
 End active-mode responses with one line:
 
-`Active Goblin Mode: MINI-ASTRA v5 | Execution footprint: <roles actually used>.`
+`Active Goblin Mode: MINI-ASTRA v6 | Execution footprint: <roles actually used>.`

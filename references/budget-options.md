@@ -1,4 +1,4 @@
-# Budget setup and options (v5)
+# Budget setup and options (v6)
 
 The helper uses Python 3's standard library. Run `scripts/budget.py` relative to the loaded skill directory. It returns JSON; the Coordinator asks the user through the available input tool or conversation. It never opens a terminal prompt, monitors usage, changes the model, or creates a native goal.
 
