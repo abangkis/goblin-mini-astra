@@ -1,8 +1,8 @@
 # Goblin Mini Astra
 
-Current skill version: **v6**. GPT-6 Sol Medium coordinates GPT-6 Luna workers and Astra Low investigative execution, with Astra Medium escalation. Numeric default/task budgets continue to include native goal setup without a second confirmation. `No budget` skips native goal creation and token-budget setup. Persistent defaults, task-only overrides, and scoped usage reporting remain supported. Increment the integer when skill behavior changes, keeping the README, skill declaration, and footer aligned. Documentation-only changes do not require a version increment.
+Current skill version: **v7**. GPT-6 Sol Medium coordinates GPT-6 Luna workers; Astra Low and Medium are reserved for justified uncertainty. Numeric budgets include native goal setup; `No budget` skips it. Increment the version in this README, the skill declaration, and its footer for behavior changes.
 
-A Codex skill focused on conserving Codex quota while meeting task acceptance criteria. Sol Medium coordinates; Luna handles predictable bounded work; Astra Low owns uncertain assignments through diagnosis, implementation, and validation. Routing targets cost or attributable quota per accepted outcome, including retries and review, rather than token count alone.
+A Codex skill focused on conserving Codex quota while meeting task acceptance criteria. Sol Medium coordinates; Luna handles predictable bounded work; Astra resolves justified uncertainty. Routing targets cost or attributable quota per accepted outcome, including retries and review, rather than token count alone.
 
 Derived from [Goblin Mini Pro](https://github.com/abangkis/goblin-mini-pro), with quota-conscious routing and an optional authorized GPT Pro decision gate.
 
@@ -14,14 +14,16 @@ Derived from [Goblin Mini Pro](https://github.com/abangkis/goblin-mini-pro), wit
 | Scout | GPT-6 Luna / High | Bounded read-only investigation |
 | Routine Worker | GPT-6 Luna / XHigh | Implementation and debugging with clear acceptance criteria |
 | Deep Worker | GPT-6 Luna / Max | Selectively address difficult, well-defined local problems |
-| Investigative Worker | GPT-6 Astra / Low | Own uncertain bounded work end to end |
-| Escalation Worker | GPT-6 Astra / Medium | Resolve architectural ambiguity or interacting components |
+| Investigative Worker | GPT-6 Astra / Low | Resolve a concrete, bounded uncertainty and a closely coupled fix |
+| Escalation Worker | GPT-6 Astra / Medium | Resolve interacting uncertainty, consequential architecture, or ambitious visual direction |
 
 Small tasks stay with the Coordinator when delegation would add more work. There is no mandatory escalation ladder. Delegation depends on the host's available tools and conditions; a skill cannot change the main task's model or reasoning effort. Select the intended Coordinator runtime in your host. Actual runtime is reported only when authoritative metadata establishes it.
 
 ### Choosing a worker
 
-Send an agreed endpoint implementation to Luna XHigh. An intermittent synchronization bug with an unknown cause can go directly to Astra Low, which owns diagnosis, the fix, and targeted validation. Luna Max remains selective for difficult but well-defined local work; it is not an automatic step before Astra. Use Astra Medium for consequential architectural uncertainty, conflicting evidence, or an unresolved limitation, including a small decision-only consultation when separable. Sol accepts the relevant diff and evidence without duplicating the investigation.
+Before requesting Astra, specify the unresolved question, why Sol or Luna cannot resolve it efficiently, required evidence, and a stopping condition. Send clear implementations to Luna; an intermittent bug with an unknown cause may go to Astra Low. Use Astra Medium directly for interacting or consequential uncertainty when starting with Low would likely repeat work. A long task or unexplained tool failure is not an Astra trigger. Astra stops when the question and bounded fix are verified or new evidence, access, or scope is needed. A large mechanical remainder can go to Luna when that saves more than the handoff costs. Sol accepts the relevant diff and evidence without repeating the investigation.
+
+For frontend work, **Sol Medium leads design by default** and Luna implements clear designs and states. Inspect rendered desktop/mobile screens and the primary interaction. Use Astra Low only for a specific unresolved visual or interaction gap after a focused Sol revision; give it the brief, screenshots, observed gap, and bounded question rather than restarting the frontend. Use Astra Medium directly for consequential original direction or complex experience-wide tradeoffs. These are routing hypotheses: compare accepted frontend results, retries, handoffs, and attributable usage before claiming savings or retiring Astra from frontend work.
 
 Select **GPT-6 Sol Medium** as the main task runtime in Codex to match the Coordinator profile. Updating this skill does not switch an existing task model. All workers share the task budget, with one worker by default, at most two independent workers concurrently, and no worker-created subagents. The budget helper and native goal flow are unchanged. Relative cost effectiveness of these routes has not been benchmarked.
 
@@ -95,7 +97,7 @@ The active mode is `MINI-ASTRA`. A later explicit Goblin mode selection replaces
 Active task responses end with the loaded skill version, for example:
 
 ```text
-Active Goblin Mode: MINI-ASTRA v6 | Execution footprint: Coordinator.
+Active Goblin Mode: MINI-ASTRA v7 | Execution footprint: Coordinator.
 ```
 
 This identifies the skill instructions in use, not the model version. Existing tasks must load updated instructions before reporting a newer skill version.

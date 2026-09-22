@@ -5,9 +5,9 @@ description: Coordinate quota-conscious Codex work with a Sol Medium Coordinator
 
 # Goblin Mini Astra
 
-Skill version: **v6**. Report the version from the skill instructions actually loaded for this task; do not infer it from a newer file or GitHub revision. When adopting updated instructions mid-task, read them before reporting their version. Maintainers increment this integer when the skill behavior changes, keeping this declaration and the footer consistent. Documentation-only changes do not require a version increment.
+Skill version: **v7**. Report the version actually loaded; read updated instructions before adopting them mid-task. Increment this integer and the footer for behavior changes, not documentation-only edits.
 
-Optimize Codex quota consumption while meeting the user's acceptance criteria. Use Sol Medium to coordinate, Luna for predictable bounded work, and Astra Low to own uncertain execution. Judge routing by cost or attributable quota per accepted outcome, including handoffs, review, and retries; fewer tokens alone do not establish better value. Fewer agents, tokens, or checks are useful only when they reduce total work without leaving the outcome incomplete.
+Optimize Codex quota per accepted outcome, including handoffs, review, and retries. Sol Medium coordinates, Luna handles predictable bounded work, and Astra handles justified uncertainty. Do not trade away acceptance criteria for fewer tokens or agents.
 
 This is a routing baseline, not a measured quota-saving guarantee. API prices, token counts, and reasoning labels do not establish Codex subscription quota charges. Do not embed price ratios or assumed quota multipliers.
 
@@ -15,9 +15,9 @@ This is a routing baseline, not a measured quota-saving guarantee. API prices, t
 
 An explicit `$goblin-mini-astra` invocation or selection activates `MINI-ASTRA` for subsequent work in the current task. The latest explicit Goblin mode selection or trustworthy active marker wins. Stop this routing when the user stops Goblin mode or selects another Goblin mode. Do not combine inactive routing policies. If multiple modes are requested without a clear selection, clarify before delegating. If the active mode becomes uncertain after compaction, continue ordinary nondelegated work where possible and clarify before applying this routing.
 
-The Coordinator's design target is `gpt-6-sol` / `medium`. A skill cannot change the running main task's model or effort. Respect a user-selected runtime; disclose a mismatch with the target once rather than pretending to switch it. Never open a new task merely to obtain the preferred Coordinator.
+The Coordinator targets `gpt-6-sol` / `medium`. A skill cannot switch the main task's runtime; respect the user's choice and disclose a mismatch once. Do not create a task to obtain the target.
 
-Keep role/design target, requested runtime, and actual runtime separate. Confirm actual provider/model/effort only from authoritative host or response metadata; otherwise mark the missing information `unverified`. Successful work and requested overrides are not proof of the runtime used.
+Distinguish design target, requested runtime, and actual runtime. Verify actual model/effort from authoritative metadata or mark it `unverified`.
 
 ## Choose the smallest sufficient route
 
@@ -28,28 +28,34 @@ Keep role/design target, requested runtime, and actual runtime separate. Confirm
 | Scout | `gpt-6-luna` / `high` | Read-only questions have a bounded search area and observable answers |
 | Routine Worker | `gpt-6-luna` / `xhigh` | Implement a clear solution with explicit acceptance criteria |
 | Deep Worker | `gpt-6-luna` / `max` | A difficult local problem has sufficient evidence, clear boundaries, and a concrete reason for deeper reasoning |
-| Investigative Worker | `gpt-6-astra` / `low` | Own an uncertain bounded problem through diagnosis, implementation, and targeted validation |
-| Escalation Worker | `gpt-6-astra` / `medium` | Architectural ambiguity, interacting components, conflicting evidence, or a diagnosed reasoning limitation warrants stronger reasoning |
+| Investigative Worker | `gpt-6-astra` / `low` | Resolve a concrete, bounded uncertainty and own the resulting fix when efficient |
+| Escalation Worker | `gpt-6-astra` / `medium` | Resolve interacting uncertainty, conflicting evidence, consequential architecture, or an ambitious visual direction |
 
-Use direct execution when briefing and checking a delegate would cost more than doing the remaining work. Conversely, the Coordinator should not complete substantial discovery or implementation and then delegate it again.
+Execute directly when delegation overhead exceeds the remaining work. Do not repeat substantial Coordinator work through a delegate.
 
-Choose by uncertainty and ownership, not task size alone. An agreed endpoint implementation fits Luna XHigh; diagnosing and fixing intermittent synchronization loss can go directly to Astra Low. Let the Investigative Worker finish its bounded assignment instead of adding a routine handoff to Luna or repeating discovery in Sol. Keep Luna Max selective for difficult local problems with clear boundaries; prefer it only when evidence or task fit supports its value over Astra Low. There is no mandatory model/effort ladder, and task length alone does not justify escalation. Effort labels are not equivalent capability scores across models.
+Before requesting Astra, name the unresolved question, why the existing Coordinator or Luna cannot resolve it efficiently, the evidence needed, and a stopping condition. A long task, vague difficulty, or a failed tool call is not enough. An agreed endpoint fits Luna XHigh; an intermittent failure with an unknown cause may go directly to Astra Low. Use Astra Medium directly when interacting components, conflicting evidence, or consequential architecture make Low likely to repeat work. There is no mandatory model ladder; effort labels are not equivalent capability scores across models.
 
-Use the existing Coordinator for a small question it can resolve with current evidence. Assign architectural uncertainty, conflicting evidence, or a diagnosed limitation to the Astra Medium Escalation Worker when delegation is justified and permitted. Pass only the unresolved problem and reusable evidence. A separable decision-only consultation uses this same role, not a new permanent reviewer. Sol reviews relevant changes and evidence without repeating the worker investigation; Astra review is not an obligatory stage. Do not describe Sol Medium as Astra Medium.
+Keep small questions with the Coordinator. An Astra assignment ends when its question is answered and the bounded outcome is verified, or when progress requires new evidence, access, or scope. Let Astra Low finish a closely coupled fix; hand off a large mechanical remainder to Luna only when saved execution outweighs briefing and review. Pass only the unresolved question and reusable evidence to Medium, including for a separable decision-only consultation. Sol reviews relevant changes without repeating discovery; Astra review is not an obligatory stage. Do not describe Sol Medium as Astra Medium.
+
+### Frontend routing
+
+Frontend work alone does not justify Astra. Sol Medium owns design direction and visual judgment by default; Luna implements clear designs, components, responsive behavior, and states. Judge rendered desktop/mobile screens and the primary interaction, not code or build output alone.
+
+Use Astra Low for a specific unresolved visual or interaction problem after a focused Sol revision still misses the stated quality bar. Give it the brief, rendered evidence, the observed gap, and a bounded question; accept a targeted correction rather than restarting the whole frontend. Use Astra Medium directly for a consequential, original visual direction or complex interaction whose requirements and tradeoffs span the experience. This is a routing hypothesis, not proof that Sol or Luna matches Astra's frontend quality. Compare accepted results and attributable usage on representative frontend tasks before claiming savings or retiring Astra from this category.
 
 ## Work from the remaining delta
 
-Before routing, identify the unfinished outcome, relevant existing changes, trusted evidence, and remaining uncertainty. Inspect only enough to set a useful boundary and find canonical repository instructions/tooling.
+Before routing, identify the unfinished outcome, existing changes, trusted evidence, and uncertainty. Inspect enough to set the boundary and find canonical tooling.
 
-Reuse successful investigation, tests, lint, builds, and artifact verification while their relevant inputs remain unchanged. Record enough source/artifact identity and scope to know when evidence becomes stale. A commit, push, consultation, or model change alone does not invalidate payload validation.
+Reuse successful evidence while its inputs remain unchanged; retain source/artifact identity and scope. A commit, push, consultation, or model change alone does not invalidate payload validation.
 
-The Coordinator owns scope, authorization, integration, consequential operations, and authoritative final readback. Workers may perform in-scope edits and validation already authorized by the user. Discussion, review, diagnosis, or planning requests remain read-only unless the user authorizes implementation.
+The Coordinator owns scope, authorization, integration, consequential operations, and final readback. Workers may edit and validate within authorization. Discussion, review, diagnosis, and planning remain read-only without implementation authorization.
 
 ## Delegation budget and brief
 
-Default to one leaf subagent. The Coordinator may use up to two leaf subagents concurrently when their tasks are independent and the expected time or quality benefit justifies the additional quota consumption and coordination overhead. This bounded parallel routing does not require a separate user request. Delegate only when there is a concrete bounded benefit and the host's delegation conditions are satisfied; a skill invocation alone is not a reason to spawn. Subagents must not create subagents.
+Default to one leaf subagent. Use at most two concurrently for independent work when time or quality gains justify quota and coordination overhead. Delegate only for a concrete benefit under host rules; invocation alone is insufficient. Workers cannot create subagents.
 
-Request the selected model and effort explicitly through supported host controls. Prefer a compact standalone brief over copying the full conversation. With a host that disallows overrides on full-history forks, use a supported limited/no-history fork and supply the necessary context. Never silently substitute another model or effort. If a requested target is unavailable, disclose it and use the existing Coordinator when that remains sufficient; if the user required that target or the remaining problem exceeds this fallback, report the blocker.
+Request model/effort through host controls. Brief compactly; use a limited/no-history fork when required for overrides. Never silently substitute. If unavailable, disclose and work directly when sufficient; report a blocker if the target was required or direct work is insufficient.
 
 A brief should contain only:
 
@@ -62,7 +68,7 @@ Tell the delegate:
 
 > Work only on the unfinished delta within this scope. Reuse the listed successful evidence while its relevant inputs remain unchanged. Do not repeat verified investigation or validation without a concrete reason. Use canonical tooling. Do not create subagents. Return a concise result with changed files, relevant commands/results, evidence locations, unresolved questions, and residual risk. If blocked, identify the failed stage and cause; do not broaden scope or cycle through retries.
 
-While a delegate works, do only useful independent work, such as preparing integration or checking a separate acceptance boundary. Avoid duplicate investigation, competing edits, frequent polling, and repeated context summaries. Reuse a delegate when continuity saves rediscovery, unless isolation or a different runtime is needed.
+While a delegate works, avoid duplicate investigation, competing edits, and frequent polling. Reuse it when continuity saves rediscovery.
 
 ## Validation and escalation
 
@@ -70,7 +76,7 @@ Accept work using evidence appropriate to the changed boundary. Start with the n
 
 Inspect the relevant diff and evidence before acceptance. Do not automatically rerun a worker's passing checks or commission a full Astra audit. A worker's unsupported success claim is not evidence; fill the specific evidence gap.
 
-After failure, distinguish code/logic problems from tooling, environment, permissions, and external-state failures. A stronger model does not fix missing credentials or authorization. Permit one targeted retry after a causal correction or materially new evidence; if the same stage fails again, diagnose the unresolved cause and choose a justified escalation or report the blocker. Do not rotate models for the same unexplained failure.
+After failure, distinguish reasoning/code problems from tooling, environment, permissions, and external state. A stronger model does not fix missing access. Retry once only after a causal correction or material new evidence; if the stage fails again, diagnose and escalate a specific reasoning gap or report the blocker. Do not rotate models for an unexplained failure.
 
 An escalation brief preserves successful work and identifies the unresolved question, failed hypothesis, and evidence. It must not restart the whole task. Finish with one consolidated readback of the outcome and relevant outstanding risk.
 
@@ -116,4 +122,4 @@ For nontrivial tasks, report initial budget/source, verified native state, measu
 
 End active-mode responses with one line:
 
-`Active Goblin Mode: MINI-ASTRA v6 | Execution footprint: <roles actually used>.`
+`Active Goblin Mode: MINI-ASTRA v7 | Execution footprint: <roles actually used>.`
