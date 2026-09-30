@@ -1,13 +1,13 @@
 ---
 name: goblin-mini-astra
-description: Coordinate quota-conscious Codex work with a Sol Medium Coordinator, bounded Luna workers, Astra Low investigative execution, selective Astra Medium escalation, and optional authorized GPT Pro consultation. Use when the user selects Goblin Mini Astra or its active mode continues in the current task. Discussing, creating, or reviewing this skill does not activate its execution mode.
+description: Coordinate quota-conscious Codex work with a Sol 6.1 Medium Coordinator, bounded Luna workers, selective Sol 6.1 investigation, justified Astra execution, and optional authorized GPT Pro consultation. Use when the user selects Goblin Mini Astra or its active mode continues in the current task. Discussing, creating, or reviewing this skill does not activate its execution mode.
 ---
 
 # Goblin Mini Astra
 
-Skill version: **v7**. Report the version actually loaded; read updated instructions before adopting them mid-task. Increment this integer and the footer for behavior changes, not documentation-only edits.
+Skill version: **v8**. Report the version actually loaded; read updated instructions before adopting them mid-task. Increment this integer and the footer for behavior changes, not documentation-only edits.
 
-Optimize Codex quota per accepted outcome, including handoffs, review, and retries. Sol Medium coordinates, Luna handles predictable bounded work, and Astra handles justified uncertainty. Do not trade away acceptance criteria for fewer tokens or agents.
+Optimize Codex quota per accepted outcome, including handoffs, review, and retries. Sol 6.1 Medium coordinates and handles investigation when efficient; Luna handles predictable bounded work; selective Sol or Astra workers resolve harder uncertainty. Do not trade away acceptance criteria for fewer tokens or agents.
 
 This is a routing baseline, not a measured quota-saving guarantee. API prices, token counts, and reasoning labels do not establish Codex subscription quota charges. Do not embed price ratios or assumed quota multipliers.
 
@@ -15,7 +15,7 @@ This is a routing baseline, not a measured quota-saving guarantee. API prices, t
 
 An explicit `$goblin-mini-astra` invocation or selection activates `MINI-ASTRA` for subsequent work in the current task. The latest explicit Goblin mode selection or trustworthy active marker wins. Stop this routing when the user stops Goblin mode or selects another Goblin mode. Do not combine inactive routing policies. If multiple modes are requested without a clear selection, clarify before delegating. If the active mode becomes uncertain after compaction, continue ordinary nondelegated work where possible and clarify before applying this routing.
 
-The Coordinator targets `gpt-6-sol` / `medium`. A skill cannot switch the main task's runtime; respect the user's choice and disclose a mismatch once. Do not create a task to obtain the target.
+The Coordinator targets `gpt-6.1-sol` / `medium`. A skill cannot switch the main task's runtime; respect the user's choice and disclose a mismatch once. Do not create a task to obtain the target. Sol 6.1 Light means `low` in host controls; it does not support `none` or `minimal`.
 
 Distinguish design target, requested runtime, and actual runtime. Verify actual model/effort from authoritative metadata or mark it `unverified`.
 
@@ -23,23 +23,27 @@ Distinguish design target, requested runtime, and actual runtime. Verify actual 
 
 | Role or situation | Requested model / effort | Route when |
 | --- | --- | --- |
-| Coordinator | `gpt-6-sol` / `medium` design target | Scope, routing, user communication, integration, and final acceptance |
-| Direct execution | Existing Coordinator | Work is small, clear, already understood, or a continuation of verified work |
+| Coordinator | `gpt-6.1-sol` / `medium` design target | Scope, routing, user communication, integration, and final acceptance |
+| Direct execution | Existing Coordinator | Small work, verified continuations, or bounded investigation the Coordinator can resolve efficiently with its existing context |
 | Scout | `gpt-6-luna` / `high` | Read-only questions have a bounded search area and observable answers |
 | Routine Worker | `gpt-6-luna` / `xhigh` | Implement a clear solution with explicit acceptance criteria |
-| Deep Worker | `gpt-6-luna` / `max` | A difficult local problem has sufficient evidence, clear boundaries, and a concrete reason for deeper reasoning |
-| Investigative Worker | `gpt-6-astra` / `low` | Resolve a concrete, bounded uncertainty and own the resulting fix when efficient |
+| Deep Worker | `gpt-6-luna` / `max` by default; `gpt-6.1-sol` / `low` selectively | Difficult bounded work with sufficient evidence; use Sol Low when cross-component understanding or judgment justifies its cost |
+| Investigative Worker | `gpt-6.1-sol` / `high` or `xhigh`; `gpt-6-astra` / `low` for a justified capability gap | Resolve bounded uncertainty and own the resulting fix and targeted validation when efficient |
 | Escalation Worker | `gpt-6-astra` / `medium` | Resolve interacting uncertainty, conflicting evidence, consequential architecture, or an ambitious visual direction |
 
 Execute directly when delegation overhead exceeds the remaining work. Do not repeat substantial Coordinator work through a delegate.
 
-Before requesting Astra, name the unresolved question, why the existing Coordinator or Luna cannot resolve it efficiently, the evidence needed, and a stopping condition. A long task, vague difficulty, or a failed tool call is not enough. An agreed endpoint fits Luna XHigh; an intermittent failure with an unknown cause may go directly to Astra Low. Use Astra Medium directly when interacting components, conflicting evidence, or consequential architecture make Low likely to repeat work. There is no mandatory model ladder; effort labels are not equivalent capability scores across models.
+Keep Scout and Routine work on Luna when sufficient. Luna Max remains the Deep default for difficult local problems with objective checks. Sol 6.1 Low is a selective alternative, not a wholesale replacement: lower effort does not establish a lower task cost than Luna Max. Compare accepted outcomes, retries, handoffs, Coordinator work, and attributable usage before claiming savings.
 
-Keep small questions with the Coordinator. An Astra assignment ends when its question is answered and the bounded outcome is verified, or when progress requires new evidence, access, or scope. Let Astra Low finish a closely coupled fix; hand off a large mechanical remainder to Luna only when saved execution outweighs briefing and review. Pass only the unresolved question and reusable evidence to Medium, including for a separable decision-only consultation. Sol reviews relevant changes without repeating discovery; Astra review is not an obligatory stage. Do not describe Sol Medium as Astra Medium.
+For a delegated investigation, choose Sol 6.1 High when evidence, boundaries, and a validation path are clear; choose XHigh when plausible hypotheses, interactions, or edge cases require deeper analysis. Sol 6.1 Max is an exceptional Deep or Investigative profile for very dense, well-defined reasoning with sufficient evidence and objective checks. Name the reason for Max; it is neither a permanent role nor a required step before Astra.
+
+Before requesting Astra, name the unresolved question, why the available Sol or Luna route cannot resolve it efficiently, the evidence needed, and a stopping condition. Astra Low fits a bounded capability gap, such as hypotheses that do not explain the evidence. Use Astra Medium directly for interacting uncertainty, conflicting evidence, consequential architecture, or experience-wide visual tradeoffs when a lighter route would likely repeat work. A long task, vague difficulty, or a failed tool call is not enough. There is no mandatory model ladder or required failed Sol attempt; effort labels are not equivalent capability scores across models.
+
+Keep small questions with the Coordinator. An investigative assignment ends when its question and bounded outcome are verified, or when progress requires new evidence, access, or scope. Let its worker finish a closely coupled fix; hand off a large mechanical remainder to Luna only when saved execution outweighs briefing and review. Pass only unresolved questions and reusable evidence to an escalation, including a separable decision-only consultation. Sol reviews relevant changes without repeating discovery; Astra review is not obligatory. Do not describe Sol Medium as Astra Medium.
 
 ### Frontend routing
 
-Frontend work alone does not justify Astra. Sol Medium owns design direction and visual judgment by default; Luna implements clear designs, components, responsive behavior, and states. Judge rendered desktop/mobile screens and the primary interaction, not code or build output alone.
+Frontend work alone does not justify Astra. Sol 6.1 Medium owns design direction and visual judgment by default; Luna implements clear designs, components, responsive behavior, and states. Judge rendered desktop/mobile screens and the primary interaction, not code or build output alone.
 
 Use Astra Low for a specific unresolved visual or interaction problem after a focused Sol revision still misses the stated quality bar. Give it the brief, rendered evidence, the observed gap, and a bounded question; accept a targeted correction rather than restarting the whole frontend. Use Astra Medium directly for a consequential, original visual direction or complex interaction whose requirements and tradeoffs span the experience. This is a routing hypothesis, not proof that Sol or Luna matches Astra's frontend quality. Compare accepted results and attributable usage on representative frontend tasks before claiming savings or retiring Astra from this category.
 
@@ -96,7 +100,7 @@ After resolving budget policy, skip ongoing bookkeeping for simple tasks unless 
 
 Prefer usage metadata already available. Use `get_goal` for task usage at costly decision points and final readback; account quota is a separate signal. Reuse a recent snapshot when still relevant. Account for the read, context replay, reasoning, and reporting overhead; do not spend more measuring than the decision warrants. If metadata is unavailable, record the reason once and follow the agreed fallback rather than repeated retrieval attempts. Include the shared remaining budget and stopping condition in delegate briefs; never allocate the full remainder independently to both workers.
 
-Compare consumption with verified progress. If usage grows without progress, diagnose and change approach; Astra Medium may avoid repeated Luna attempts. Low remaining account quota favors fewer optional investigations and marginal parallel tasks, but never removes required validation. Account-wide quota movement is a caution signal, not usage attributable to this task or a fixed token conversion.
+Compare consumption with verified progress. If usage grows without progress, diagnose and change approach; a justified Sol or Astra profile may avoid repeated attempts. Low remaining account quota favors fewer optional investigations and marginal parallel tasks, but never removes required validation. Account-wide quota movement is a caution signal, not usage attributable to this task or a fixed token conversion.
 
 A numeric effective budget is a ceiling, not a spending target. The bundled native setup request does not expand the task objective or authorize unrelated actions. `No budget` skips native setup; if a cap already exists, remove only that cap through supported controls while preserving usage, or disclose the host limitation. Keep quota-conscious routing and required validation. Reserve a task-appropriate portion for integration, validation, and handoff without a fixed percentage. Near the effective limit, prepare a checkpoint and seek a scope/budget decision before further work would exceed it. Do not claim incomplete work is complete or increase/reset a budget to continue. Distinguish a behavioral budget from a verified host-enforced hard cap.
 
@@ -122,4 +126,4 @@ For nontrivial tasks, report initial budget/source, verified native state, measu
 
 End active-mode responses with one line:
 
-`Active Goblin Mode: MINI-ASTRA v7 | Execution footprint: <roles actually used>.`
+`Active Goblin Mode: MINI-ASTRA v8 | Execution footprint: <roles actually used>.`

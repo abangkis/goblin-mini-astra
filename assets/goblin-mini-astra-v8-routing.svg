@@ -1,0 +1,146 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="2000" height="1470" viewBox="0 0 2000 1470" role="img" aria-labelledby="title desc">
+<title id="title">Goblin Mini Astra v8 routing</title>
+<desc id="desc">GPT-6.1 Sol Medium coordinates and investigates directly when efficient. Scout uses GPT-6 Luna High, Routine uses Luna XHigh, and Deep uses Luna Max with a selective Sol 6.1 Low alternative. Investigative uses Sol 6.1 High or XHigh, or Astra Low for a justified capability gap. Astra Medium handles consequential interacting uncertainty. Sol Max is exceptional. There is no mandatory escalation ladder. Sol integrates and accepts verified results. All workers share the task budget; GPT Pro is an optional authorized consultation.</desc>
+<defs>
+ <linearGradient id="bg" x2="1" y2="1"><stop stop-color="#0b1720"/><stop offset="1" stop-color="#112b31"/></linearGradient>
+ <marker id="arrow" markerWidth="9" markerHeight="9" refX="7" refY="4.5" orient="auto" markerUnits="strokeWidth"><path d="M1 1 L7 4.5 L1 8" fill="none" stroke="#d2dee1" stroke-width="1.4"/></marker>
+ <style>
+ .frame{fill:none;stroke:#416a72;stroke-width:1.5}
+ .gold{fill:#11262e;stroke:#f0d88c;stroke-width:2}
+ .cyan{fill:#10272f;stroke:#45d8e7;stroke-width:2}
+ .white{fill:#10242c;stroke:#d8e6e8;stroke-width:1.7}
+ .purple{fill:none;stroke:#ca8af5;stroke-width:1.7;stroke-dasharray:8 6}
+ .route{fill:none;stroke:#d2dee1;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
+ .divider{stroke:#557b84;stroke-width:1.2}
+ .title{font:700 38px Consolas,'Courier New',monospace;fill:#b9f5ff;letter-spacing:.8px}
+ .head{font:700 24px Consolas,'Courier New',monospace;fill:#e7f7fa}
+ .subhead{font:700 20px Consolas,'Courier New',monospace;fill:#dff3f6}
+ .body{font:19px 'Segoe UI',Arial,sans-serif;fill:#c8dce0}
+ .small{font:17px 'Segoe UI',Arial,sans-serif;fill:#b6ccd1}
+ .tiny{font:15px 'Segoe UI',Arial,sans-serif;fill:#b6ccd1}
+ .tag{font:700 17px Consolas,'Courier New',monospace;fill:#95f2ff;letter-spacing:.3px}
+ .goldText{fill:#f5df9b}.purpleText{fill:#e1b8ff}
+ </style>
+</defs>
+<rect width="2000" height="1470" fill="url(#bg)"/>
+<rect class="frame" x="12" y="12" width="1976" height="1446" rx="6"/>
+<text class="title" x="1000" y="65" text-anchor="middle">Goblin Mini Astra v8</text>
+<rect class="gold" x="650" y="95" width="700" height="108" rx="6"/>
+<text class="head goldText" x="1000" y="132" text-anchor="middle">COORDINATOR</text>
+<text class="body" x="1000" y="163" text-anchor="middle">GPT-6.1 Sol · Medium · design target</text>
+<text class="small" x="1000" y="188" text-anchor="middle">Own scope, routing, integration, and final acceptance</text>
+<path class="route" d="M1000 203 V226" marker-end="url(#arrow)"/>
+<rect class="cyan" x="440" y="235" width="1120" height="91" rx="6"/>
+<text class="head" x="1000" y="270" text-anchor="middle">ROUTE BY UNCERTAINTY + OWNERSHIP</text>
+<text class="small" x="1000" y="300" text-anchor="middle">Define the remaining outcome, available evidence, and stopping condition</text>
+<path class="route" d="M1000 326 V348"/>
+<path class="route" d="M1000 348 H165 V361" marker-end="url(#arrow)"/>
+<path class="route" d="M1000 348 H645 V361" marker-end="url(#arrow)"/>
+<path class="route" d="M1000 348 H1270 V361" marker-end="url(#arrow)"/>
+<path class="route" d="M1000 348 H1760 V361" marker-end="url(#arrow)"/>
+<rect class="gold" x="40" y="370" width="250" height="450" rx="6"/>
+<text class="tag goldText" x="165" y="405" text-anchor="middle">DIRECT EXECUTION</text>
+<rect class="white" x="60" y="433" width="210" height="141" rx="6"/>
+<text class="subhead" x="165" y="470" text-anchor="middle">EXISTING SOL</text>
+<text class="small" x="165" y="505" text-anchor="middle">Small or known work</text>
+<text class="small" x="165" y="532" text-anchor="middle">Verified continuation</text>
+<text class="small" x="165" y="622" text-anchor="middle">Bounded investigation</text>
+<text class="small" x="165" y="649" text-anchor="middle">with useful context</text>
+<text class="small" x="165" y="676" text-anchor="middle">and an efficient route</text>
+<text class="small" x="165" y="746" text-anchor="middle">Use when handoff adds</text>
+<text class="small" x="165" y="773" text-anchor="middle">more work than it saves</text>
+<rect class="gold" x="310" y="370" width="670" height="450" rx="6"/>
+<text class="tag goldText" x="645" y="405" text-anchor="middle">PREDICTABLE / WELL-DEFINED WORK</text>
+<rect class="white" x="330" y="433" width="196" height="291" rx="6"/>
+<rect class="white" x="547" y="433" width="196" height="291" rx="6"/>
+<rect class="white" x="764" y="433" width="196" height="291" rx="6"/>
+<text class="subhead" x="428" y="468" text-anchor="middle">SCOUT</text>
+<text class="small" x="428" y="502" text-anchor="middle">GPT-6 Luna · High</text>
+<text class="small" x="428" y="554" text-anchor="middle">Bounded read-only</text>
+<text class="small" x="428" y="581" text-anchor="middle">search with</text>
+<text class="small" x="428" y="608" text-anchor="middle">observable answers</text>
+<text class="subhead" x="645" y="468" text-anchor="middle">ROUTINE</text>
+<text class="small" x="645" y="502" text-anchor="middle">GPT-6 Luna · XHigh</text>
+<text class="small" x="645" y="554" text-anchor="middle">Clear implementation</text>
+<text class="small" x="645" y="581" text-anchor="middle">and explicit</text>
+<text class="small" x="645" y="608" text-anchor="middle">acceptance criteria</text>
+<text class="subhead" x="862" y="468" text-anchor="middle">DEEP</text>
+<text class="small" x="862" y="502" text-anchor="middle">GPT-6 Luna · Max</text>
+<text class="tiny" x="862" y="525" text-anchor="middle">Selective default</text>
+<text class="small" x="862" y="558" text-anchor="middle">Difficult local work</text>
+<text class="small" x="862" y="585" text-anchor="middle">with objective checks</text>
+<text class="tiny" x="862" y="622" text-anchor="middle">Alternative:</text>
+<text class="small" x="862" y="647" text-anchor="middle">Sol 6.1 · Low / Light</text>
+<text class="tiny" x="862" y="677" text-anchor="middle">Bounded cross-component</text>
+<text class="tiny" x="862" y="699" text-anchor="middle">judgment justifies cost</text>
+<text class="small" x="645" y="760" text-anchor="middle">Keep Luna where sufficient; Sol Light is selective</text>
+<text class="tiny" x="645" y="791" text-anchor="middle">Lower effort does not establish lower task cost</text>
+<rect class="cyan" x="1000" y="370" width="540" height="450" rx="6"/>
+<text class="tag" x="1270" y="405" text-anchor="middle">INVESTIGATIVE WORKER</text>
+<rect class="cyan" x="1020" y="433" width="235" height="291" rx="6"/>
+<rect class="cyan" x="1285" y="433" width="235" height="291" rx="6"/>
+<text class="subhead" x="1137.5" y="468" text-anchor="middle">SOL 6.1</text>
+<text class="small" x="1137.5" y="502" text-anchor="middle">High / Extra High</text>
+<text class="small" x="1137.5" y="550" text-anchor="middle">High: clear boundaries,</text>
+<text class="small" x="1137.5" y="577" text-anchor="middle">evidence + validation</text>
+<text class="small" x="1137.5" y="621" text-anchor="middle">Extra High: deeper checks</text>
+<text class="small" x="1137.5" y="648" text-anchor="middle">of hypotheses, interactions,</text>
+<text class="small" x="1137.5" y="675" text-anchor="middle">or edge cases</text>
+<text class="subhead" x="1402.5" y="468" text-anchor="middle">ASTRA LOW</text>
+<text class="small" x="1402.5" y="502" text-anchor="middle">Justified capability gap</text>
+<text class="small" x="1402.5" y="552" text-anchor="middle">A concrete question Sol</text>
+<text class="small" x="1402.5" y="579" text-anchor="middle">or Luna cannot resolve</text>
+<text class="small" x="1402.5" y="606" text-anchor="middle">efficiently</text>
+<text class="small" x="1402.5" y="645" text-anchor="middle">Example: hypotheses fail</text>
+<text class="small" x="1402.5" y="672" text-anchor="middle">to explain the evidence</text>
+<text class="small" x="1270" y="760" text-anchor="middle">Select by the unresolved question</text>
+<text class="tiny" x="1270" y="791" text-anchor="middle">Diagnose → closely coupled fix → targeted validation</text>
+<rect class="cyan" x="1560" y="370" width="400" height="450" rx="6"/>
+<text class="tag" x="1760" y="405" text-anchor="middle">ESCALATION WORKER</text>
+<rect class="cyan" x="1580" y="433" width="360" height="291" rx="6"/>
+<text class="subhead" x="1760" y="475" text-anchor="middle">ASTRA MEDIUM</text>
+<text class="body" x="1760" y="526" text-anchor="middle">Interacting uncertainty</text>
+<text class="body" x="1760" y="562" text-anchor="middle">Conflicting evidence</text>
+<text class="body" x="1760" y="598" text-anchor="middle">Consequential architecture</text>
+<text class="body" x="1760" y="634" text-anchor="middle">Ambitious visual direction</text>
+<text class="small" x="1760" y="696" text-anchor="middle">Can be selected directly</text>
+<text class="small" x="1760" y="760" text-anchor="middle">Before either Astra profile:</text>
+<text class="tiny" x="1760" y="791" text-anchor="middle">Unknown + reason + evidence + stop condition</text>
+<path class="route" d="M165 820 V857 H1000"/>
+<path class="route" d="M645 820 V857 H1000"/>
+<path class="route" d="M1270 820 V857 H1000"/>
+<path class="route" d="M1760 820 V857 H1000"/>
+<path class="route" d="M1000 857 V881" marker-end="url(#arrow)"/>
+<rect class="cyan" x="630" y="890" width="740" height="112" rx="6"/>
+<text class="head" x="1000" y="930" text-anchor="middle">SOL INTEGRATES + VERIFIES</text>
+<text class="body" x="1000" y="965" text-anchor="middle">Accept the relevant outcome; reuse valid evidence</text>
+<text class="small" x="1000" y="990" text-anchor="middle">No automatic Astra audit or duplicate investigation</text>
+<rect class="frame" x="40" y="890" width="560" height="112" rx="6"/>
+<text class="tag" x="320" y="922" text-anchor="middle">SOL 6.1 MAX: EXCEPTIONAL</text>
+<text class="small" x="320" y="954" text-anchor="middle">Deep or Investigative profile; dense reasoning,</text>
+<text class="small" x="320" y="981" text-anchor="middle">sufficient evidence, and objective checks</text>
+<rect class="frame" x="1400" y="890" width="560" height="112" rx="6"/>
+<text class="tag" x="1680" y="922" text-anchor="middle">NO REQUIRED MODEL LADDER</text>
+<text class="small" x="1680" y="954" text-anchor="middle">No mandatory Sol failure before Astra.</text>
+<text class="small" x="1680" y="981" text-anchor="middle">Choose a route for the remaining problem.</text>
+<rect class="frame" x="40" y="1034" width="1920" height="181" rx="6"/>
+<text class="tag" x="1000" y="1065" text-anchor="middle">FRONTEND: ASTRA IS SELECTIVE</text>
+<path class="divider" d="M680 1085 V1192 M1320 1085 V1192"/>
+<text class="subhead" x="360" y="1113" text-anchor="middle">SOL 6.1 MEDIUM</text>
+<text class="small" x="360" y="1145" text-anchor="middle">Design direction + visual judgment by default</text>
+<text class="small" x="360" y="1172" text-anchor="middle">Review rendered desktop and mobile screens</text>
+<text class="subhead" x="1000" y="1113" text-anchor="middle">LUNA</text>
+<text class="small" x="1000" y="1145" text-anchor="middle">Implement clear designs, responsive behavior, and states</text>
+<text class="small" x="1000" y="1172" text-anchor="middle">Check the primary interaction</text>
+<text class="subhead" x="1640" y="1113" text-anchor="middle">ASTRA LOW / MEDIUM</text>
+<text class="small" x="1640" y="1145" text-anchor="middle">Low: a specific gap after a focused Sol revision</text>
+<text class="small" x="1640" y="1172" text-anchor="middle">Medium: consequential original direction or interaction</text>
+<text class="tiny" x="1640" y="1195" text-anchor="middle">Brief + rendered evidence + bounded question</text>
+<rect class="frame" x="40" y="1235" width="1920" height="78" rx="6"/>
+<text class="tag" x="1000" y="1266" text-anchor="middle">SHARED BUDGET + BOUNDED DELEGATION</text>
+<text class="small" x="1000" y="1294" text-anchor="middle">Numeric budget → native goal setup · default one worker · at most two independent workers · no worker-created subagents</text>
+<rect class="purple" x="670" y="1336" width="660" height="69" rx="6"/>
+<text class="subhead purpleText" x="1000" y="1364" text-anchor="middle">OPTIONAL GPT PRO</text>
+<text class="small" x="1000" y="1391" text-anchor="middle">Separate consultation · explicit authorization</text>
+<text class="tiny" x="1000" y="1435" text-anchor="middle">Profiles are requested design targets; verify actual runtime. Routing savings remain unmeasured.</text>
+</svg>
