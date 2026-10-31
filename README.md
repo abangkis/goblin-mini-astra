@@ -1,8 +1,8 @@
 # Goblin Mini Astra
 
-Current skill version: **v8**. GPT-6.1 Sol Medium coordinates GPT-6 Luna workers, with selective Sol 6.1 Low/High/XHigh execution and justified Astra Low/Medium use. Numeric budgets include native goal setup; `No budget` skips it. Increment the version in this README, the skill declaration, and its footer for behavior changes.
+Current skill version: **v9**. GPT-6.1 Sol Medium remains the default Coordinator, with GPT-6.1 Terra XHigh supported as a user-selected profile. Both coordinate GPT-6 Luna workers, with selective Sol 6.1 Low/High/XHigh execution and justified Astra Low/Medium use. Numeric budgets include native goal setup; `No budget` skips it. Increment the version in this README, the skill declaration, and its footer for behavior changes.
 
-A Codex skill focused on conserving Codex quota while meeting task acceptance criteria. Sol 6.1 Medium coordinates and investigates when efficient; Luna handles predictable bounded work; selective Sol or Astra workers resolve harder uncertainty. Routing targets cost or attributable quota per accepted outcome, including retries and review, rather than token count alone.
+A Codex skill focused on conserving Codex quota while meeting task acceptance criteria. The selected Coordinator communicates, integrates results, and investigates when efficient; Luna handles predictable bounded work; selective Sol or Astra workers resolve harder uncertainty. Routing targets cost or attributable quota per accepted outcome, including retries and review, rather than token count alone.
 
 Derived from [Goblin Mini Pro](https://github.com/abangkis/goblin-mini-pro), with quota-conscious routing and an optional authorized GPT Pro decision gate.
 
@@ -10,7 +10,7 @@ Derived from [Goblin Mini Pro](https://github.com/abangkis/goblin-mini-pro), wit
 
 | Role | Model / reasoning design target | Purpose |
 | --- | --- | --- |
-| Coordinator | GPT-6.1 Sol / Medium | Scope, routing, direct investigation when efficient, integration, and final acceptance |
+| Coordinator | GPT-6.1 Sol / Medium default; GPT-6.1 Terra / XHigh user-selected | Scope, routing, direct investigation when efficient, integration, and final acceptance |
 | Scout | GPT-6 Luna / High | Bounded read-only investigation |
 | Routine Worker | GPT-6 Luna / XHigh | Implementation and debugging with clear acceptance criteria |
 | Deep Worker | GPT-6 Luna / Max by default; GPT-6.1 Sol / Low selectively | Difficult bounded problems; Sol Low for justified cross-component understanding or judgment |
@@ -25,19 +25,36 @@ Keep bounded searches on Luna High, clear implementations on Luna XHigh, and dif
 
 The Coordinator can finish bounded investigations directly when its existing context makes delegation inefficient. For delegated investigations, Sol 6.1 High fits clear boundaries, sufficient evidence, and a validation path; XHigh fits plausible hypotheses, interactions, or edge cases needing deeper analysis. Sol 6.1 Max is an exceptional Deep or Investigative profile for dense, well-defined reasoning with objective checks, not a permanent role or required escalation step.
 
-Before requesting Astra, specify the unresolved question, why the available Sol or Luna route cannot resolve it efficiently, required evidence, and a stopping condition. Astra Low fits a bounded capability gap, such as hypotheses that do not explain the evidence. Use Astra Medium directly for interacting or consequential uncertainty when a lighter route would likely repeat work. A long task or unexplained tool failure is not an Astra trigger, and no failed Sol attempt is required. An investigation stops when its question and bounded fix are verified or new evidence, access, or scope is needed. A large mechanical remainder can go to Luna when that saves more than the handoff costs. Sol accepts the relevant diff and evidence without repeating discovery.
+Before requesting Astra, specify the unresolved question, why the Coordinator or available Sol/Luna route cannot resolve it efficiently, required evidence, and a stopping condition. Astra Low fits a bounded capability gap, such as hypotheses that do not explain the evidence. Use Astra Medium directly for interacting or consequential uncertainty when a lighter route would likely repeat work. A long task or unexplained tool failure is not an Astra trigger, and no failed Sol attempt is required. An investigation stops when its question and bounded fix are verified or new evidence, access, or scope is needed. A large mechanical remainder can go to Luna when that saves more than the handoff costs. The Coordinator accepts the relevant diff and evidence without repeating discovery.
 
-For frontend work, **Sol 6.1 Medium leads design by default** and Luna implements clear designs and states. Inspect rendered desktop/mobile screens and the primary interaction. Use Astra Low only for a specific unresolved visual or interaction gap after a focused Sol revision; give it the brief, screenshots, observed gap, and bounded question rather than restarting the frontend. Use Astra Medium directly for consequential original direction or complex experience-wide tradeoffs. These are routing hypotheses: compare accepted frontend results, retries, handoffs, and attributable usage before claiming savings or retiring Astra from frontend work.
+For frontend work, **the selected Coordinator owns routine design direction and visual judgment** and Luna implements clear designs and states. Inspect rendered desktop/mobile screens and the primary interaction. Use Astra Low only for a specific unresolved visual or interaction gap after a focused Coordinator revision; give it the brief, screenshots, observed gap, and bounded question rather than restarting the frontend. Use Astra Medium directly for consequential original direction or complex experience-wide tradeoffs. These are routing hypotheses: compare accepted frontend results, retries, handoffs, and attributable usage before claiming savings or retiring Astra from frontend work.
 
-Select **GPT-6.1 Sol Medium** as the main task runtime in Codex to match the Coordinator profile. Updating this skill does not switch an existing task model. Sol 6.1 Light maps to `low`; `none` and `minimal` are unsupported. Request each worker's selected model and effort explicitly through available host controls. All workers share the task budget, with one worker by default, at most two independent workers concurrently, and no worker-created subagents. The budget helper and native goal flow are unchanged. Relative cost effectiveness of these routes has not been benchmarked.
+Select **GPT-6.1 Sol Medium** for the default Coordinator or **GPT-6.1 Terra XHigh** for the supported alternative in the host model controls. Updating this skill does not switch an existing task model. Sol 6.1 Light maps to `low`; `none` and `minimal` are unsupported. Request each worker's selected model and effort explicitly through available host controls. All workers share the task budget, with one worker by default, at most two independent workers concurrently, and no worker-created subagents. The budget helper and native goal flow are unchanged. Relative cost effectiveness of these routes has not been benchmarked.
 
 Official references: [GPT-6.1 Sol specifications](https://developers.openai.com/api/docs/models/gpt-6.1-sol), [model and effort selection](https://learn.chatgpt.com/docs/models), and [Codex pricing](https://learn.chatgpt.com/docs/pricing). Model positioning and token rates are not measured savings for this workflow.
 
+## Terra XHigh Coordinator
+
+Select GPT-6.1 Terra and XHigh in the thread's model controls, then load this skill. An explicit profile request controls the intended role; authoritative host metadata establishes the actual runtime. Reloading instructions does not switch the model or reset the task. Sol Medium remains the default; selecting Terra does not change worker models, budget preferences, or native goal counters.
+
+Terra owns communication, scope, routing, integration, evidence-backed acceptance, and routine frontend visual judgment. It can complete small tasks directly. Sol workers handle specific unresolved technical questions and complex implementation, not mandatory approval of every Terra result. Astra retains its evidence-based escalation gate. One worker remains the default, with at most two independent workers and no nested delegation.
+
+The profile aims for natural explanations and prompt useful responses while preserving correctness and completion. The Coordinator explains consequences before implementation detail, synthesizes worker findings, and keeps necessary constraints in compact briefs. Before ending, it checks every requested outcome: finish remaining authorized feasible work within budget, or identify the blocker, budget limit, or decision needed. This also applies to `no budget` without creating a native goal. Do not add work after acceptance criteria are met.
+
+Example after selecting Terra XHigh in the host:
+
+```text
+$goblin-mini-astra
+Use the supported Terra XHigh Coordinator profile for this task. Preserve the existing scope, approvals, completed work, effective budget, native goal, and accumulated usage. Do not switch worker profiles or restart the task.
+```
+
+Compare Terra XHigh with Sol Medium using time to a useful explanation, time to accepted completion, clarification requests, unnecessary handoffs, integration defects, and prompts needed to resume unfinished work. Naturalness, speed, and persistence improvements remain unverified for this workflow; XHigh is a supported choice, not a measured optimum. See the [Terra model specifications](https://developers.openai.com/api/docs/models/gpt-6.1-terra).
+
 ## Routing diagram
 
-![Goblin Mini Astra v8 routing](assets/goblin-mini-astra-v8-routing.png)
+![Goblin Mini Astra v9 routing](assets/goblin-mini-astra-v9-routing.png)
 
-The diagram shows conditional worker selection, the Astra gate, and shared budget controls. [Download the editable SVG](assets/goblin-mini-astra-v8-routing.svg).
+The diagram shows conditional worker selection, the Astra gate, and shared budget controls. [Download the editable SVG](assets/goblin-mini-astra-v9-routing.svg).
 
 ## Quota-conscious workflow
 
@@ -109,7 +126,7 @@ The active mode is `MINI-ASTRA`. A later explicit Goblin mode selection replaces
 Active task responses end with the loaded skill version, for example:
 
 ```text
-Active Goblin Mode: MINI-ASTRA v8 | Execution footprint: Coordinator.
+Active Goblin Mode: MINI-ASTRA v9 | Execution footprint: Coordinator.
 ```
 
 This identifies the skill instructions in use, not the model version. Existing tasks must load updated instructions before reporting a newer skill version.
@@ -126,7 +143,7 @@ Read C:\Users\Force\.codex\skills\goblin-mini-astra\SKILL.md from disk and apply
 Preserve this task's scope, approvals, completed work, effective budget, native goal, and accumulated usage. Do not restart the task or reset counters. Reloading the skill does not change this task's model.
 ```
 
-Replace the path if your installed skill is in a different location. To match the Coordinator profile, select GPT-6.1 Sol Medium separately in the host's model controls.
+Replace the path if your installed skill is in a different location. To match a supported Coordinator profile, select GPT-6.1 Sol Medium or GPT-6.1 Terra XHigh separately in the host's model controls.
 
 ## Optional GPT Pro consultation
 
@@ -136,7 +153,7 @@ Pro recommendations are checked against current evidence before implementation. 
 
 ## Validation status
 
-Run helper behavior tests with `python -B -m unittest discover -s tests -v`. Tests use project-local isolated settings, covering first-use setup, saved presets/custom defaults, task overrides, no-budget behavior, invalid data, persistence across processes, and no false claims of native measurement/configuration. They do not alter personal preferences or create native goals. Native goal control and aggregate worker enforcement require live host validation; these tests do not prove them. The v8 update passed eight helper tests and restricted checks for structure, local references, version/UI consistency, and budget preservation. The official `quick_validate.py` could not run because PyYAML was unavailable. Routing has not been independently runtime-tested or quota-benchmarked.
+Run helper behavior tests with `python -B -m unittest discover -s tests -v`. Tests use project-local isolated settings, covering first-use setup, saved presets/custom defaults, task overrides, no-budget behavior, invalid data, persistence across processes, and no false claims of native measurement/configuration. They do not alter personal preferences or create native goals. Native goal control and aggregate worker enforcement require live host validation; these tests do not prove them. The v9 update preserves the budget helper and adds Coordinator profile, completion, and communication instructions. Eight budget helper tests passed. Restricted frontmatter/version checks, local reference checks, budget preservation checks, and SVG parsing passed; the routing PNG was visually inspected. The official quick_validate.py could not run because PyYAML was unavailable. Routing has not been independently runtime-tested or quota-benchmarked.
 
 ## License
 
