@@ -1,4 +1,4 @@
-# Native budget integration (v9)
+# Native budget integration (v10)
 
 Use native tools exposed by the current host, not shell access to internal databases or an invented API. The preference helper cannot install a native budget, count tokens, or establish enforcement. Keep configuration, measurement, and stopping guarantees separate.
 
@@ -10,7 +10,7 @@ Use native tools exposed by the current host, not shell access to internal datab
 4. The user's bundled-budget instruction requests native goal setup whenever this workflow runs with a saved numeric default or an explicit numeric task budget. Do not ask a separate confirmation to create that native goal. If no goal exists, or the previous goal is complete, use `create_goal` with the current authorized task objective and resolved token budget. Reuse the user's standing instruction; do not treat each new task as requiring renewed budget consent. Do not replace an unfinished/inactive goal merely to restart its counter: use supported continuation controls or report the concrete conflict. A workflow without a numeric budget does not request goal creation, and ordinary tasks outside this selected workflow do not inherit this request.
 5. After authorized creation, read back with `get_goal` unless the creation result already authoritatively verifies the objective and budget. Only then report `native configured`. A requested value without successful readback is `unverified`, not configured.
 
-For goal changes, budget removal, pause, or resume, use only supported host controls and explicit user authorization. The current `update_goal` tool controls completion/blockage, not budgets or pausing. Never use false completion/blockage to simulate a budget stop, clear an active goal, or bypass a cap. Do not manipulate app state files as a fallback.
+For goal changes, budget removal, pause, or resume, use only supported host controls and explicit user authorization. Follow the current host tool schema for supported goal statuses and operations; pause only on an explicit user request. Do not assume a status-update tool can change budgets. Never use false completion/blockage to simulate a budget stop, clear an active goal, or bypass a cap. Do not manipulate app state files as a fallback.
 
 With `no budget`, do not create a native goal or set a native token budget, including merely to obtain accounting. The override requests removal of the task cap if one is already active; use supported controls without a redundant permission question while preserving the objective and usage history. If removal is unsupported, report that the existing cap remains and the exact user action needed. Never claim the helper removed a native cap or clear the goal/counter as a workaround.
 
