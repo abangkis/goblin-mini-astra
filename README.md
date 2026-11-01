@@ -1,6 +1,6 @@
 # Goblin Mini Astra
 
-Current skill version: **v10**. The default Coordinator is **GPT-6.1 Sol High**. Sol Medium and Terra XHigh remain explicit alternatives. Sol Low and Sol Max are excluded from standard routing; Luna Max and Astra Low remain available.
+Current skill version: **v11**. The default Coordinator is **GPT-6.1 Sol High**. Sol Medium and Terra XHigh remain explicit alternatives. Sol Low and Sol Max are excluded from standard routing; Luna Max and Astra Low remain available.
 
 Derived from [Goblin Mini Pro](https://github.com/abangkis/goblin-mini-pro). Optimize accepted outcomes, clear communication, responsiveness, and attributable usage without reducing required quality. Profile benefits remain unmeasured in this workflow.
 
@@ -25,17 +25,29 @@ Do not send work to another Sol High merely because the Coordinator is Sol High 
 
 The Coordinator checks all requested outcomes before ending. Continue feasible authorized work within budget, or identify the blocker, budget limit, or user decision needed. This applies to `no budget` too, without creating a goal. Communication leads with the outcome and practical consequence, synthesizes worker findings, and retains necessary constraints without a rigid word limit.
 
+## Frontend: Sol and Astra only
+
+Use Sol Medium for bounded FE work with established design decisions, Sol High/XHigh for open UX/design decisions or complex UI implementation, Astra Low for a specific visual correction, and Astra Medium for original direction or taste-led deliverables. The [model profile reference](references/model-profiles.md) owns the mapping; [frontend routing](references/frontend-routing.md) defines selection and ownership.
+
+Luna is excluded from all frontend work, including FE scouting, mechanical edits, and UI testing. It remains available for separable non-FE tasks. An existing Sol High Coordinator may execute directly; small work does not require a worker or effort change. A non-Sol/Astra Coordinator must use an allowed frontend execution route and cannot waive the restriction.
+
+"Modern, clean, premium" is not a complete design specification. For taste-led work, the design owner stays through the first rendered implementation. Check desktop/mobile rendering and primary interactions before acceptance. Astra still requires a specific question, routing reason, evidence, and stopping condition; original visual direction can justify direct selection without a failed Sol attempt.
+
 ## Routing diagram
 
 ```mermaid
 flowchart TD
     C["Coordinator: Sol High default"] --> A{"Choose action by remaining outcome"}
     P["Explicit alternatives: Sol Medium or Terra XHigh"] -.-> C
-    A --> D["Execute directly: useful context / closely coupled work"]
+    A --> D["Execute directly: useful context; FE requires Sol/Astra"]
     A --> W["Delegate outcome: independent work / context isolation / capability"]
     A --> J["Bounded judgment: one question; retain implementation ownership"]
-    W --> L["Scout: Luna High | Routine: Luna XHigh"]
-    W --> B["Deep: Luna Max | selective Sol Medium"]
+    W --> T{"Frontend work?"}
+    T -->|No| L["Scout: Luna High | Routine: Luna XHigh"]
+    T -->|Yes| FE["Sol Medium: bounded | Sol High/XHigh: open UX or complex UI"]
+    FE --> V
+    FE -.->|Visual gap or original direction; apply gate| G
+    T -->|No| B["Deep: Luna Max | selective Sol Medium"]
     W --> I["Investigative: Sol High / XHigh"]
     J --> I
     W --> G{"Named capability gap + evidence + stop condition"}
@@ -49,7 +61,7 @@ flowchart TD
     V --> F["Finish verified outcome or report concrete blocker / budget / decision"]
 ```
 
-There is no mandatory escalation ladder. Sol Low/Max require an explicit user request. All delegates share the task budget. Frontend ownership follows the selected Coordinator; Pro is a separate authorized consultation.
+There is no mandatory escalation ladder. Sol Low/Max require an explicit user request. All delegates share the task budget. Frontend uses only Sol/Astra; the design owner stays through the first render; Pro is a separate authorized consultation.
 
 ## Budget defaults and options
 
@@ -110,7 +122,7 @@ The active mode is `MINI-ASTRA`. A later explicit Goblin mode selection replaces
 Active task responses end with the loaded skill version, for example:
 
 ```text
-Active Goblin Mode: MINI-ASTRA v10 | Execution footprint: Coordinator.
+Active Goblin Mode: MINI-ASTRA v11 | Execution footprint: Coordinator.
 ```
 
 This identifies the skill instructions in use, not the model version. Existing tasks must load updated instructions before reporting a newer skill version.
@@ -137,7 +149,7 @@ Pro recommendations are checked against current evidence before implementation. 
 
 ## Validation status
 
-Run helper behavior tests with `python -B -m unittest discover -s tests -v`. Tests use project-local isolated settings, covering first-use setup, saved presets/custom defaults, task overrides, no-budget behavior, invalid data, persistence across processes, and no false claims of native measurement/configuration. They do not alter personal preferences or create native goals. Native goal control and aggregate worker enforcement require live host validation; these tests do not prove them. The v10 update modularizes model selection and frontend routing, adds three explicit Coordinator actions, and preserves the budget helper. Eight budget helper tests passed, along with restricted structure, local-link, version, and model-separation checks. An independent read-only review of five routing scenarios found no material routing contradiction; it was a policy review, not live execution. The official quick_validate.py remains unavailable because PyYAML is missing. No live model-quality or latency benchmark has been performed.
+Run helper behavior tests with `python -B -m unittest discover -s tests -v`. Tests use project-local isolated settings, covering first-use setup, saved presets/custom defaults, task overrides, no-budget behavior, invalid data, persistence across processes, and no false claims of native measurement/configuration. They do not alter personal preferences or create native goals. Native goal control and aggregate worker enforcement require live host validation; these tests do not prove them. The v11 update restricts frontend execution to Sol/Astra and preserves the budget helper. Budget helper tests passed in v10 and that helper is unchanged. Restricted structure, local-link, version, and budget-preservation checks passed for this instruction-only update. The official quick_validate.py remains unavailable because PyYAML is missing. No live model-quality or latency benchmark has been performed.
 
 
 ## License

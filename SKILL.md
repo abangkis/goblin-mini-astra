@@ -5,7 +5,7 @@ description: Coordinate quota-conscious Codex work with a model-independent Coor
 
 # Goblin Mini Astra
 
-Skill version: **v10**. Report the version actually loaded; read updated instructions before adopting them mid-task. Increment this integer and the footer for behavior changes, not documentation-only edits.
+Skill version: **v11**. Report the version actually loaded; read updated instructions before adopting them mid-task. Increment this integer and the footer for behavior changes, not documentation-only edits.
 
 Optimize Codex quota per accepted outcome, including handoffs, review, and retries. The selected Coordinator communicates clearly, responds promptly, and handles investigation when efficient; workers handle separable outcomes or specific unresolved questions. Do not trade away acceptance criteria for fewer tokens or agents.
 
@@ -37,7 +37,7 @@ Match the action to a profile in the model reference. Before capability escalati
 
 An investigative assignment ends when its question and bounded outcome are verified, or new evidence, access, or scope is needed. For delegated outcomes, let the worker finish a closely coupled fix. A bounded-judgment brief grants no implementation ownership unless separately authorized. Transfer a large mechanical remainder only when the savings justify another handoff. Escalation carries forward successful work and only the unresolved question.
 
-For frontend work, read [frontend routing](references/frontend-routing.md) when design, rendered UI, or interaction judgment is relevant.
+Before routing any frontend investigation, design, implementation, debugging, or visual/interaction validation, read [frontend routing](references/frontend-routing.md). Its domain-specific profile restrictions override general worker routing, including for small FE tasks.
 
 ## Work from the remaining delta
 
@@ -120,4 +120,4 @@ For nontrivial tasks, report initial budget/source, verified native state, measu
 
 End active-mode responses with one line:
 
-`Active Goblin Mode: MINI-ASTRA v10 | Execution footprint: <roles actually used>.`
+`Active Goblin Mode: MINI-ASTRA v11 | Execution footprint: <roles actually used>.`
