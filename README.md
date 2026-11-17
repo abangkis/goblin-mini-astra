@@ -1,6 +1,6 @@
 # Goblin Mini Astra
 
-Current skill version: **v11**. The default Coordinator is **GPT-6.1 Sol High**. Sol Medium and Terra XHigh remain explicit alternatives. Sol Low and Sol Max are excluded from standard routing; Luna Max and Astra Low remain available.
+Current skill version: **v12**. The default Coordinator is **GPT-6.2 Sol High**. Sol Medium and Terra XHigh remain explicit alternatives. Sol Low and Sol Max are excluded from standard routing; Luna Max and Astra Low remain available.
 
 Derived from [Goblin Mini Pro](https://github.com/abangkis/goblin-mini-pro). Optimize accepted outcomes, clear communication, responsiveness, and attributable usage without reducing required quality. Profile benefits remain unmeasured in this workflow.
 
@@ -25,6 +25,8 @@ Do not send work to another Sol High merely because the Coordinator is Sol High 
 
 The Coordinator checks all requested outcomes before ending. Continue feasible authorized work within budget, or identify the blocker, budget limit, or user decision needed. This applies to `no budget` too, without creating a goal. Communication leads with the outcome and practical consequence, synthesizes worker findings, and retains necessary constraints without a rigid word limit.
 
+For a narrow technical decision, ask for the answer and evidence. When diagnosis, the fix, and its workflow test depend on the same evidence, give one worker ownership through validation. For follow-ups, append the new observation or decision to that worker's brief. At handoff and acceptance, report any required check that could not run, why, and which outcome still needs verification.
+
 ## Frontend: Sol and Astra only
 
 Use Sol Medium for bounded FE work with established design decisions, Sol High/XHigh for open UX/design decisions or complex UI implementation, Astra Low for a specific visual correction, and Astra Medium for original direction or taste-led deliverables. The [model profile reference](references/model-profiles.md) owns the mapping; [frontend routing](references/frontend-routing.md) defines selection and ownership.
@@ -37,7 +39,7 @@ Luna is excluded from all frontend work, including FE scouting, mechanical edits
 
 ```mermaid
 flowchart TD
-    C["Coordinator: Sol High default"] --> A{"Choose action by remaining outcome"}
+    C["Coordinator: GPT-6.2 Sol High default"] --> A{"Choose action by remaining outcome"}
     P["Explicit alternatives: Sol Medium or Terra XHigh"] -.-> C
     A --> D["Execute directly: useful context; FE requires Sol/Astra"]
     A --> W["Delegate outcome: independent work / context isolation / capability"]
@@ -52,7 +54,7 @@ flowchart TD
     J --> I
     W --> G{"Named capability gap + evidence + stop condition"}
     J --> G
-    G --> E["Astra Low: bounded gap | Astra Medium: interacting uncertainty"]
+    G --> E["GPT-6.2 Astra Low: bounded gap | Medium: interacting uncertainty"]
     D --> V["Coordinator integrates; checks uncovered interactions and completion"]
     L --> V
     B --> V
@@ -122,7 +124,7 @@ The active mode is `MINI-ASTRA`. A later explicit Goblin mode selection replaces
 Active task responses end with the loaded skill version, for example:
 
 ```text
-Active Goblin Mode: MINI-ASTRA v11 | Execution footprint: Coordinator.
+Active Goblin Mode: MINI-ASTRA v12 | Execution footprint: Coordinator.
 ```
 
 This identifies the skill instructions in use, not the model version. Existing tasks must load updated instructions before reporting a newer skill version.
@@ -139,7 +141,7 @@ Read C:\Users\Force\.codex\skills\goblin-mini-astra\SKILL.md from disk and apply
 Preserve this task's scope, approvals, completed work, effective budget, native goal, and accumulated usage. Do not restart the task or reset counters. Reloading the skill does not change this task's model.
 ```
 
-Replace the path if your installed skill is in a different location. To match a supported Coordinator profile, select GPT-6.1 Sol High (default), Sol Medium, or Terra XHigh separately in the host's model controls.
+Replace the path if your installed skill is in a different location. To match a supported Coordinator profile, select GPT-6.2 Sol High (default), Sol Medium, or Terra XHigh separately in the host's model controls.
 
 ## Optional GPT Pro consultation
 
@@ -149,7 +151,7 @@ Pro recommendations are checked against current evidence before implementation. 
 
 ## Validation status
 
-Run helper behavior tests with `python -B -m unittest discover -s tests -v`. Tests use project-local isolated settings, covering first-use setup, saved presets/custom defaults, task overrides, no-budget behavior, invalid data, persistence across processes, and no false claims of native measurement/configuration. They do not alter personal preferences or create native goals. Native goal control and aggregate worker enforcement require live host validation; these tests do not prove them. The v11 update restricts frontend execution to Sol/Astra and preserves the budget helper. Budget helper tests passed in v10 and that helper is unchanged. Restricted structure, local-link, version, and budget-preservation checks passed for this instruction-only update. The official quick_validate.py remains unavailable because PyYAML is missing. No live model-quality or latency benchmark has been performed.
+Run helper behavior tests with `python -B -m unittest discover -s tests -v`. Tests use project-local isolated settings, covering first-use setup, saved presets/custom defaults, task overrides, no-budget behavior, invalid data, persistence across processes, and no false claims of native measurement/configuration. They do not alter personal preferences or create native goals. Native goal control and aggregate worker enforcement require live host validation; these tests do not prove them. To evaluate the upgrade, compare v11 and v12 at the same effort and Standard speed. Use the same repository state, acceptance criteria, and tools for a cross-service fix. Compare frontend renders blind on desktop and mobile using the same brief and primary interaction. Record time to accepted completion, user corrections, handoffs, and attributable usage with its coverage. Then compare Medium with High on the same model. No live model-quality or latency benchmark has been performed.
 
 
 ## License

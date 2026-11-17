@@ -4,14 +4,14 @@ This is the authoritative model/effort mapping for Goblin Mini Astra. Load it on
 
 | Role | Model / effort | Selection reason |
 | --- | --- | --- |
-| Default Coordinator | `gpt-6.1-sol` / `high` | Scope, communication, direct investigation, routing, integration, and final acceptance |
-| Alternative Coordinator | `gpt-6.1-sol` / `medium`; `gpt-6.1-terra` / `xhigh` | Explicit user choice; same responsibilities and safeguards |
+| Default Coordinator | `gpt-6.2-sol` / `high` | Scope, communication, direct investigation, routing, integration, and final acceptance |
+| Alternative Coordinator | `gpt-6.2-sol` / `medium`; `gpt-6.1-terra` / `xhigh` | Explicit user choice; same responsibilities and safeguards |
 | Scout | `gpt-6-luna` / `high` | Bounded read-only search with observable answers |
 | Routine Worker | `gpt-6-luna` / `xhigh` | Clear implementation/debugging with explicit acceptance criteria |
-| Deep Worker | `gpt-6-luna` / `max`; selectively `gpt-6.1-sol` / `medium` | Luna for difficult local problems with objective checks; Sol Medium for bounded cross-component judgment with clear questions and validation |
-| Investigative Worker | `gpt-6.1-sol` / `high` or `xhigh` | High for a separable investigation or specific independent assessment; XHigh for unresolved hypotheses, interactions, or edge cases requiring deeper analysis |
-| Capability-gap investigation | `gpt-6-astra` / `low` | A bounded question the Coordinator or available workers cannot resolve efficiently; own the closely coupled fix and validation when authorized |
-| Escalation Worker | `gpt-6-astra` / `medium` | Interacting uncertainty, conflicting evidence, consequential architecture, or experience-wide visual tradeoffs |
+| Deep Worker | `gpt-6-luna` / `max`; selectively `gpt-6.2-sol` / `medium` | Luna for difficult local problems with objective checks; Sol Medium for bounded cross-component judgment with clear questions and validation |
+| Investigative Worker | `gpt-6.2-sol` / `high` or `xhigh` | High for a separable investigation or specific independent assessment; XHigh for unresolved hypotheses, interactions, or edge cases requiring deeper analysis |
+| Capability-gap investigation | `gpt-6.2-astra` / `low` | A bounded question the Coordinator or available workers cannot resolve efficiently; own the closely coupled fix and validation when authorized |
+| Escalation Worker | `gpt-6.2-astra` / `medium` | Interacting uncertainty, conflicting evidence, consequential architecture, or experience-wide visual tradeoffs. When the escalation gate is met, one owner may trace a cross-service failure through the fix and targeted workflow test |
 
 Sol Low and Sol Max are excluded from standard routing. Use them only on explicit user request, subject to host availability; do not select them as automatic fallbacks. Luna Max and Astra Low remain standard options.
 
@@ -21,10 +21,10 @@ Frontend work uses only Sol and Astra. These profiles override general worker ro
 
 | Frontend profile | Model / effort | Selection reason |
 | --- | --- | --- |
-| Frontend bounded | `gpt-6.1-sol` / `medium` | Defined design system, bounded FE investigation, mechanical edits, responsive fixes, or known states |
-| Frontend design and implementation | `gpt-6.1-sol` / `high`; selectively `xhigh` | Open design/UX decisions or complex implementation; XHigh for concrete unresolved interactions or hypotheses |
-| Frontend visual correction | `gpt-6-astra` / `low` | Specific unresolved visual or interaction gap with rendered evidence |
-| Frontend original direction | `gpt-6-astra` / `medium` | Original direction, taste-led deliverables, or experience-wide visual tradeoffs |
+| Frontend bounded | `gpt-6.2-sol` / `medium` | Defined design system, bounded FE investigation, mechanical edits, responsive fixes, or known states |
+| Frontend design and implementation | `gpt-6.2-sol` / `high`; selectively `xhigh` | Open design/UX decisions or complex implementation; XHigh for concrete unresolved interactions or hypotheses |
+| Frontend visual correction | `gpt-6.2-astra` / `low` | Specific unresolved visual or interaction gap with rendered evidence |
+| Frontend original direction | `gpt-6.2-astra` / `medium` | Original direction, taste-led deliverables, or experience-wide visual tradeoffs |
 
 An existing Sol Coordinator can execute directly at its current effort; the bounded profile does not require downgrading a Sol High thread or spawning a worker. Alternative Coordinator selection does not waive the frontend family restriction.
 

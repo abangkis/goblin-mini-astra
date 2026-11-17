@@ -5,7 +5,7 @@ description: Coordinate quota-conscious Codex work with a model-independent Coor
 
 # Goblin Mini Astra
 
-Skill version: **v11**. Report the version actually loaded; read updated instructions before adopting them mid-task. Increment this integer and the footer for behavior changes, not documentation-only edits.
+Skill version: **v12**. Report the version actually loaded; read updated instructions before adopting them mid-task. Increment this integer and the footer for behavior changes, not documentation-only edits.
 
 Optimize Codex quota per accepted outcome, including handoffs, review, and retries. The selected Coordinator communicates clearly, responds promptly, and handles investigation when efficient; workers handle separable outcomes or specific unresolved questions. Do not trade away acceptance criteria for fewer tokens or agents.
 
@@ -35,7 +35,7 @@ A same-model worker needs a concrete benefit such as independent work, context i
 
 Match the action to a profile in the model reference. Before capability escalation, name the unresolved question, why current routes are insufficient, needed evidence, and a stopping condition. There is no mandatory ladder or required failed attempt. A failed tool call, missing access, or vague difficulty is not a capability gap.
 
-An investigative assignment ends when its question and bounded outcome are verified, or new evidence, access, or scope is needed. For delegated outcomes, let the worker finish a closely coupled fix. A bounded-judgment brief grants no implementation ownership unless separately authorized. Transfer a large mechanical remainder only when the savings justify another handoff. Escalation carries forward successful work and only the unresolved question.
+An investigative assignment ends when its question and bounded outcome are verified, or new evidence, access, or scope is needed. When diagnosis, implementation, and validation depend on the same evidence, assign one owner through the affected workflow check. Cross-service scope alone does not justify escalation. For a single decision, request the answer and supporting evidence and keep implementation with the Coordinator. A bounded-judgment brief grants no implementation ownership unless separately authorized. Transfer a large mechanical remainder only when the savings justify another handoff. Escalation carries forward successful work and only the unresolved question.
 
 Before routing any frontend investigation, design, implementation, debugging, or visual/interaction validation, read [frontend routing](references/frontend-routing.md). Its domain-specific profile restrictions override general worker routing, including for small FE tasks.
 
@@ -64,7 +64,7 @@ Include these constraints concisely in the brief; reuse established context inst
 
 > Work only on the unfinished delta within this scope. Reuse the listed successful evidence while its relevant inputs remain unchanged. Do not repeat verified investigation or validation without a concrete reason. Use canonical tooling. Do not create subagents. Return a concise result with changed files, relevant commands/results, evidence locations, unresolved questions, and residual risk. If blocked, identify the failed stage and cause; do not broaden scope or cycle through retries.
 
-While a delegate works, avoid duplicate investigation, competing edits, and frequent polling. Reuse it when continuity saves rediscovery.
+While a delegate works, avoid duplicate investigation, competing edits, and frequent polling. When the same worker holds relevant evidence, continue its assignment by appending the new observation, changed scope, or decision needed. Preserve the original brief and its constraints.
 
 ## Validation and escalation
 
@@ -76,7 +76,7 @@ After failure, distinguish reasoning/code problems from tooling, environment, pe
 
 An escalation brief preserves successful work and identifies the unresolved question, failed hypothesis, and evidence. It must not restart the whole task. Finish with one consolidated readback of the outcome and relevant outstanding risk.
 
-Before ending a task, check requested outcomes against verified completion. Continue any remaining authorized, feasible work within the effective budget; a worker finishing or a phase succeeding does not complete the whole task. Otherwise identify the specific blocker, budget limit, or user decision needed and preserve a useful checkpoint. Apply this check with `no budget` too; do not create a goal merely to encourage persistence. Do not invent additional work after acceptance criteria are met.
+At worker handoff and final acceptance, identify each required check that could not run, the observed reason (or unknown cause), and the specific outcome still unverified. Before ending a task, check requested outcomes against verified completion. Continue any remaining authorized, feasible work within the effective budget; a worker finishing or a phase succeeding does not complete the whole task. Otherwise identify the specific blocker, budget limit, or user decision needed and preserve a useful checkpoint. Apply this check with `no budget` too; do not create a goal merely to encourage persistence. Do not invent additional work after acceptance criteria are met.
 
 ## Budget default and task overrides
 
@@ -120,4 +120,4 @@ For nontrivial tasks, report initial budget/source, verified native state, measu
 
 End active-mode responses with one line:
 
-`Active Goblin Mode: MINI-ASTRA v11 | Execution footprint: <roles actually used>.`
+`Active Goblin Mode: MINI-ASTRA v12 | Execution footprint: <roles actually used>.`
