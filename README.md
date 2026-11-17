@@ -1,6 +1,6 @@
 # Goblin Mini Astra
 
-Current skill version: **v12**. The default Coordinator is **GPT-6.2 Sol High**. Sol Medium and Terra XHigh remain explicit alternatives. Sol Low and Sol Max are excluded from standard routing; Luna Max and Astra Low remain available.
+Current skill version: **v13**. The default Coordinator is **GPT-6.2 Sol High**. Sol Medium and Terra XHigh remain explicit alternatives. Sol Low and Sol Max are excluded from standard routing; Luna Max and Astra Low remain available.
 
 Derived from [Goblin Mini Pro](https://github.com/abangkis/goblin-mini-pro). Optimize accepted outcomes, clear communication, responsiveness, and attributable usage without reducing required quality. Profile benefits remain unmeasured in this workflow.
 
@@ -10,7 +10,7 @@ Derived from [Goblin Mini Pro](https://github.com/abangkis/goblin-mini-pro). Opt
 | --- | --- | --- |
 | [SKILL.md](SKILL.md) | Stable coordination, authorization, delegation, validation, completion, and communication rules | Activating the skill |
 | [Model profiles](references/model-profiles.md) | Authoritative Coordinator and worker model/effort mapping | Activation, profile selection, or delegation if not already loaded |
-| [Frontend routing](references/frontend-routing.md) | Rendered UI evidence and visual escalation | Frontend/design work |
+| [Frontend routing](references/frontend-routing.md) | FE ownership, rendered evidence, and interaction checks | Frontend/design work |
 | Budget references below | Defaults, native setup, measurement, and reporting | Relevant budget decisions |
 
 Change model mappings in the model reference; update user-facing documentation and diagrams to match. The skill contains no automatic model-switching engine. The latest explicit user selection replaces earlier profile choices; host metadata establishes actual runtime. Reloads and model changes preserve the task's scope, approvals, completed work, evidence, budget, native goal, and accumulated usage. A new default does not override an explicit task selection.
@@ -27,43 +27,43 @@ The Coordinator checks all requested outcomes before ending. Continue feasible a
 
 For a narrow technical decision, ask for the answer and evidence. When diagnosis, the fix, and its workflow test depend on the same evidence, give one worker ownership through validation. For follow-ups, append the new observation or decision to that worker's brief. At handoff and acceptance, report any required check that could not run, why, and which outcome still needs verification.
 
-## Frontend: Sol and Astra only
+## Shared model routing
 
-Use Sol Medium for bounded FE work with established design decisions, Sol High/XHigh for open UX/design decisions or complex UI implementation, Astra Low for a specific visual correction, and Astra Medium for original direction or taste-led deliverables. The [model profile reference](references/model-profiles.md) owns the mapping; [frontend routing](references/frontend-routing.md) defines selection and ownership.
+Use one [model table](references/model-profiles.md) for FE and non-FE. Luna handles objective non-FE work. Sol handles bounded delivery, design, and investigation. Astra Low addresses a specific capability gap. Astra Medium handles interacting uncertainties or original visual direction. Choose Astra High selectively when conflicting evidence affects a consequential decision, Medium is unlikely to settle it, and an available check can resolve it. High uses the same escalation role and shared budget. Select the appropriate effort directly.
 
-Luna is excluded from all frontend work, including FE scouting, mechanical edits, and UI testing. It remains available for separable non-FE tasks. An existing Sol High Coordinator may execute directly; small work does not require a worker or effort change. A non-Sol/Astra Coordinator must use an allowed frontend execution route and cannot waive the restriction.
+### Frontend ownership and evidence
 
-"Modern, clean, premium" is not a complete design specification. For taste-led work, the design owner stays through the first rendered implementation. Check desktop/mobile rendering and primary interactions before acceptance. Astra still requires a specific question, routing reason, evidence, and stopping condition; original visual direction can justify direct selection without a failed Sol attempt.
+Only Sol and Astra execute FE work, including scouting, mechanical edits, and UI testing. A Terra Coordinator obtains FE evidence from an eligible executor. The design owner carries visual work through the first render. Inspect desktop and mobile screens and exercise the primary interaction. See [frontend routing](references/frontend-routing.md) for interpreting the brief, handing off a correction, and accepting the result.
 
 ## Routing diagram
 
 ```mermaid
 flowchart TD
-    C["Coordinator: GPT-6.2 Sol High default"] --> A{"Choose action by remaining outcome"}
-    P["Explicit alternatives: Sol Medium or Terra XHigh"] -.-> C
-    A --> D["Execute directly: useful context; FE requires Sol/Astra"]
-    A --> W["Delegate outcome: independent work / context isolation / capability"]
-    A --> J["Bounded judgment: one question; retain implementation ownership"]
-    W --> T{"Frontend work?"}
-    T -->|No| L["Scout: Luna High | Routine: Luna XHigh"]
-    T -->|Yes| FE["Sol Medium: bounded | Sol High/XHigh: open UX or complex UI"]
-    FE --> V
-    FE -.->|Visual gap or original direction; apply gate| G
-    T -->|No| B["Deep: Luna Max | selective Sol Medium"]
-    W --> I["Investigative: Sol High / XHigh"]
-    J --> I
-    W --> G{"Named capability gap + evidence + stop condition"}
-    J --> G
-    G --> E["GPT-6.2 Astra Low: bounded gap | Medium: interacting uncertainty"]
-    D --> V["Coordinator integrates; checks uncovered interactions and completion"]
-    L --> V
-    B --> V
+    C["Coordinator: Sol High by default, Sol Medium or Terra XHigh by explicit choice"] --> A{"Which action serves the remaining outcome?"}
+    A -->|Direct work| D{"Coordinator eligible and context sufficient?"}
+    D -->|Yes| V
+    D -->|No| S
+    A -->|Delegate an outcome| S{"Which profiles are eligible?"}
+    A -->|Request bounded judgment| S
+    S -->|Non-FE only| L["Luna: High scout, XHigh routine, Max deep local work"]
+    S -->|FE or non-FE| Q{"What does the work require?"}
+    Q -->|Missing evidence or access| X["Obtain the missing evidence or report the blocked check"]
+    Q -->|Delivery or investigation| I["Sol: Medium bounded, High design or investigation, XHigh unresolved interactions"]
+    Q -->|Named capability gap with evidence and stop condition| G{"Which Astra effort fits?"}
+    G -->|Specific gap| B["Low"]
+    G -->|Interacting uncertainty or original direction| M["Medium"]
+    G -->|Consequential conflict beyond Medium and an available deciding check| H["High"]
+    L --> V["Coordinator collects evidence and integrates authorized changes"]
     I --> V
-    E --> V
-    V --> F["Finish verified outcome or report concrete blocker / budget / decision"]
+    B --> V
+    M --> V
+    H --> V
+    V -->|FE| R["Sol or Astra provides desktop and mobile renders and primary interaction evidence"]
+    V -->|Non-FE| F["Coordinator accepts or reports the specific unverified outcome"]
+    R --> F
 ```
 
-There is no mandatory escalation ladder. Sol Low/Max require an explicit user request. All delegates share the task budget. Frontend uses only Sol/Astra; the design owner stays through the first render; Pro is a separate authorized consultation.
+Each assignment keeps its original action and authorization. Bounded judgment returns a decision and evidence. Delegated delivery includes the closely coupled fix and validation when authorized. The Coordinator reserves budget for acceptance.
 
 ## Budget defaults and options
 
@@ -124,7 +124,7 @@ The active mode is `MINI-ASTRA`. A later explicit Goblin mode selection replaces
 Active task responses end with the loaded skill version, for example:
 
 ```text
-Active Goblin Mode: MINI-ASTRA v12 | Execution footprint: Coordinator.
+Active Goblin Mode: MINI-ASTRA v13 | Execution footprint: Coordinator.
 ```
 
 This identifies the skill instructions in use, not the model version. Existing tasks must load updated instructions before reporting a newer skill version.
@@ -151,8 +151,7 @@ Pro recommendations are checked against current evidence before implementation. 
 
 ## Validation status
 
-Run helper behavior tests with `python -B -m unittest discover -s tests -v`. Tests use project-local isolated settings, covering first-use setup, saved presets/custom defaults, task overrides, no-budget behavior, invalid data, persistence across processes, and no false claims of native measurement/configuration. They do not alter personal preferences or create native goals. Native goal control and aggregate worker enforcement require live host validation; these tests do not prove them. To evaluate the upgrade, compare v11 and v12 at the same effort and Standard speed. Use the same repository state, acceptance criteria, and tools for a cross-service fix. Compare frontend renders blind on desktop and mobile using the same brief and primary interaction. Record time to accepted completion, user corrections, handoffs, and attributable usage with its coverage. Then compare Medium with High on the same model. No live model-quality or latency benchmark has been performed.
-
+Run helper behavior tests with `python -B -m unittest discover -s tests -v`. Tests use project-local isolated settings, covering first-use setup, saved presets/custom defaults, task overrides, no-budget behavior, invalid data, persistence across processes, and no false claims of native measurement/configuration. They do not alter personal preferences or create native goals. Native goal control and aggregate worker enforcement require live host validation; these tests do not prove them. To evaluate selective High escalation, compare Astra Medium and High at Standard speed on the same decision, evidence, tools, and acceptance check. Compare correctness, rework, time to accepted completion, and attributable usage with coverage. For visual decisions, compare desktop and mobile results blind using the same brief and interaction. Quality, latency, and quota savings for this policy remain unmeasured.
 
 ## License
 

@@ -5,7 +5,7 @@ description: Coordinate quota-conscious Codex work with a model-independent Coor
 
 # Goblin Mini Astra
 
-Skill version: **v12**. Report the version actually loaded; read updated instructions before adopting them mid-task. Increment this integer and the footer for behavior changes, not documentation-only edits.
+Skill version: **v13**. Report the version actually loaded; read updated instructions before adopting them mid-task. Increment this integer and the footer for behavior changes, not documentation-only edits.
 
 Optimize Codex quota per accepted outcome, including handoffs, review, and retries. The selected Coordinator communicates clearly, responds promptly, and handles investigation when efficient; workers handle separable outcomes or specific unresolved questions. Do not trade away acceptance criteria for fewer tokens or agents.
 
@@ -37,7 +37,7 @@ Match the action to a profile in the model reference. Before capability escalati
 
 An investigative assignment ends when its question and bounded outcome are verified, or new evidence, access, or scope is needed. When diagnosis, implementation, and validation depend on the same evidence, assign one owner through the affected workflow check. Cross-service scope alone does not justify escalation. For a single decision, request the answer and supporting evidence and keep implementation with the Coordinator. A bounded-judgment brief grants no implementation ownership unless separately authorized. Transfer a large mechanical remainder only when the savings justify another handoff. Escalation carries forward successful work and only the unresolved question.
 
-Before routing any frontend investigation, design, implementation, debugging, or visual/interaction validation, read [frontend routing](references/frontend-routing.md). Its domain-specific profile restrictions override general worker routing, including for small FE tasks.
+Before routing any frontend investigation, design, implementation, debugging, or visual/interaction validation, read [frontend routing](references/frontend-routing.md). Use the shared model table for profile selection and the frontend reference for ownership and acceptance, including small FE tasks.
 
 ## Work from the remaining delta
 
@@ -102,7 +102,7 @@ Aim to account for the Coordinator and all delegates from the task baseline, usi
 
 ## Optional GPT Pro decision gate
 
-GPT Pro remains an optional decision/audit consultation, separate from Astra routing. Astra, including Astra Medium, is not evidence that GPT Pro was consulted.
+GPT Pro remains an optional decision/audit consultation, separate from Astra routing. Report a Pro consultation only when the Pro target was actually consulted.
 
 Use Pro only when explicitly requested or when the user approves a consultation for a material decision and a real Pro target is available. Invocation of this skill does not authorize an external message, upload, cross-task write, or task creation. Honor explicit authorization already present; do not ask for it again for the same consultation and target.
 
@@ -120,4 +120,4 @@ For nontrivial tasks, report initial budget/source, verified native state, measu
 
 End active-mode responses with one line:
 
-`Active Goblin Mode: MINI-ASTRA v12 | Execution footprint: <roles actually used>.`
+`Active Goblin Mode: MINI-ASTRA v13 | Execution footprint: <roles actually used>.`
