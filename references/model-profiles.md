@@ -5,14 +5,21 @@ Use this table for Coordinator selection and all worker assignments. Choose the 
 | Work | Model / effort | When to choose it |
 | --- | --- | --- |
 | Coordinate | `gpt-6.2-sol` / `high` by default | Own scope, communication, routing, integration, and acceptance. Execute directly when existing context is sufficient and the Coordinator is eligible for the work. |
-| Coordinate by explicit selection | `gpt-6.2-sol` / `medium` or `gpt-6.1-terra` / `xhigh` | Same responsibilities. A Terra Coordinator delegates the FE portion to Sol or Astra. |
 | Objective non-FE work | `gpt-6-luna` / `high`, `xhigh`, or `max` | High for bounded read-only scouting, XHigh for routine implementation or debugging, Max for a difficult local problem with objective checks. |
-| Bounded delivery | `gpt-6.2-sol` / `medium` | A separable change needs limited cross-component judgment, or a UI change follows established design decisions and known states. |
-| Design or investigation | `gpt-6.2-sol` / `high` or `xhigh` | High for open design decisions, complex implementation, or an independent investigation. Choose XHigh for specific competing hypotheses, interactions, or edge cases. |
+| Delegated delivery, design, or investigation | `gpt-6.2-sol` / `high` or `xhigh` | High for separable delivery, open design decisions, complex implementation, or an independent investigation. Choose XHigh for specific competing hypotheses, interactions, or edge cases. |
+| Computer Use worker | `gpt-6.1-terra` / `medium` by default, selectively `xhigh` | Operate an existing application through visible controls when the next action depends on screen state. Request the effort explicitly at dispatch. |
 | Bounded capability gap | `gpt-6.2-astra` / `low` | Answer one unresolved technical question or correct one observed visual or interaction defect. |
 | Escalation | `gpt-6.2-astra` / `medium` or selectively `high` | Medium for interacting uncertainties, consequential architecture, original visual direction, or experience-wide tradeoffs. Use High only when the conditions below hold. |
 
-Use only Sol or Astra for **all FE execution**, including scouting and UI testing. Apply [frontend routing](frontend-routing.md) for FE ownership and acceptance. A Sol Coordinator can handle bounded work at its current effort. A same-profile handoff needs a concrete benefit. Sol Low and Sol Max require an explicit user request and host support.
+Use only Sol or Astra for **all FE execution**, including scouting and UI testing. Apply [frontend routing](frontend-routing.md) for FE ownership and acceptance. An eligible Coordinator handles bounded work directly at its current effort when context is sufficient. A same-profile handoff needs a concrete benefit. Sol Low and Sol Max require an explicit user request and host support.
+
+## Selecting Computer Use work
+
+Choose by outcome. Entering approved records into an existing app qualifies. Reproducing a product bug or testing a frontend change belongs to Sol or Astra even when the same app and clicks are involved. Prefer an available, suitable structured tool. Delegate UI operation only when it adds value and the worker has the tool access and authorization needed for that session.
+
+Request Terra Medium for known steps with observable results. Choose XHigh directly when plausible interpretations of the UI would lead to materially different actions, choosing incorrectly would cause significant rework, and a visible check can distinguish them. For example, inspect the active object and edit mode before applying a Blender add-on to a selection. If the viewport is unreadable, obtain a usable view first. Terra High is available on explicit request.
+
+For Blender, route Python, background rendering, and MCP calls that run `bpy` to the Sol scripting route. A viewport screenshot can validate a script without a UI handoff. Use the Terra profile for actual interactive control. Consider Astra Medium for a bounded question about conflicting geometry, simulation, or render evidence. Follow the project's UI-session permissions.
 
 ## Selecting Astra effort
 

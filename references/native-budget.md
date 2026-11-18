@@ -1,4 +1,4 @@
-# Native budget integration (v13)
+# Native budget integration (v14)
 
 Use native tools exposed by the current host, not shell access to internal databases or an invented API. The preference helper cannot install a native budget, count tokens, or establish enforcement. Keep configuration, measurement, and stopping guarantees separate.
 

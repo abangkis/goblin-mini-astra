@@ -1,6 +1,6 @@
 # Goblin Mini Astra
 
-Current skill version: **v13**. The default Coordinator is **GPT-6.2 Sol High**. Sol Medium and Terra XHigh remain explicit alternatives. Sol Low and Sol Max are excluded from standard routing; Luna Max and Astra Low remain available.
+Current skill version: **v14**. The default Coordinator is **GPT-6.2 Sol High**. The Coordinator uses the model selected in the host. Eligible Coordinators handle bounded work at their current effort.
 
 Derived from [Goblin Mini Pro](https://github.com/abangkis/goblin-mini-pro). Optimize accepted outcomes, clear communication, responsiveness, and attributable usage without reducing required quality. Profile benefits remain unmeasured in this workflow.
 
@@ -29,26 +29,39 @@ For a narrow technical decision, ask for the answer and evidence. When diagnosis
 
 ## Shared model routing
 
-Use one [model table](references/model-profiles.md) for FE and non-FE. Luna handles objective non-FE work. Sol handles bounded delivery, design, and investigation. Astra Low addresses a specific capability gap. Astra Medium handles interacting uncertainties or original visual direction. Choose Astra High selectively when conflicting evidence affects a consequential decision, Medium is unlikely to settle it, and an available check can resolve it. High uses the same escalation role and shared budget. Select the appropriate effort directly.
+Use one [model table](references/model-profiles.md) for FE and non-FE. Luna handles objective non-FE work. Delegate separable delivery to Sol High when independent work or context isolation justifies the handoff. Sol XHigh handles specific unresolved hypotheses. Astra Low addresses a specific capability gap. Astra Medium handles interacting uncertainties or original visual direction. Choose Astra High selectively when conflicting evidence affects a consequential decision, Medium is unlikely to settle it, and an available check can resolve it. High uses the same escalation role and shared budget. Select the appropriate effort directly.
+
+### Operating an existing application
+
+Request GPT-6.1 Terra Medium explicitly for a Computer Use worker, such as entering records into an existing app. Choose Terra XHigh selectively when the screen supports competing interpretations, a wrong action would cause significant rework, and a visible check can settle the choice. High is available on explicit request. Obtain missing screen evidence or access before deciding to escalate.
+
+For Blender, use Sol High for delegated Python scripts, background rendering, or an MCP tool that executes `bpy`. Use Terra for authorized visible UI operation, such as a UI-only add-on. Use Astra Medium when interpreting competing explanations for a geometry or render defect is the difficult part. Check which operations the MCP server exposes. A screenshot returned with a script result can stay with the scripting owner.
 
 ### Frontend ownership and evidence
 
-Only Sol and Astra execute FE work, including scouting, mechanical edits, and UI testing. A Terra Coordinator obtains FE evidence from an eligible executor. The design owner carries visual work through the first render. Inspect desktop and mobile screens and exercise the primary interaction. See [frontend routing](references/frontend-routing.md) for interpreting the brief, handing off a correction, and accepting the result.
+Only Sol and Astra execute FE work, including scouting, mechanical edits, and UI testing. A Coordinator outside Sol/Astra obtains FE evidence from an eligible executor. The design owner carries visual work through the first render. Inspect desktop and mobile screens and exercise the primary interaction. See [frontend routing](references/frontend-routing.md) for interpreting the brief, handing off a correction, and accepting the result.
 
 ## Routing diagram
 
 ```mermaid
 flowchart TD
-    C["Coordinator: Sol High by default, Sol Medium or Terra XHigh by explicit choice"] --> A{"Which action serves the remaining outcome?"}
+    C["Coordinator: Sol High by default, honor the thread selection"] --> A{"Which action serves the remaining outcome?"}
     A -->|Direct work| D{"Coordinator eligible and context sufficient?"}
     D -->|Yes| V
     D -->|No| S
     A -->|Delegate an outcome| S{"Which profiles are eligible?"}
     A -->|Request bounded judgment| S
-    S -->|Non-FE only| L["Luna: High scout, XHigh routine, Max deep local work"]
+    S -->|Non-FE task through existing app controls| T{"Can the authorized worker observe and control the app?"}
+    T -->|Missing access or usable view| X
+    T -->|Yes| U{"Consequential UI ambiguity with a distinguishing check?"}
+    U -->|No| TM["Terra Medium"]
+    U -->|Yes| TX["Terra XHigh"]
+    TM --> V
+    TX --> V
+    S -->|Objective non-FE work| L["Luna: High scout, XHigh routine, Max deep local work"]
     S -->|FE or non-FE| Q{"What does the work require?"}
     Q -->|Missing evidence or access| X["Obtain the missing evidence or report the blocked check"]
-    Q -->|Delivery or investigation| I["Sol: Medium bounded, High design or investigation, XHigh unresolved interactions"]
+    Q -->|Delivery or investigation| I["Sol High for separable delivery or investigation, XHigh for unresolved interactions"]
     Q -->|Named capability gap with evidence and stop condition| G{"Which Astra effort fits?"}
     G -->|Specific gap| B["Low"]
     G -->|Interacting uncertainty or original direction| M["Medium"]
@@ -124,7 +137,7 @@ The active mode is `MINI-ASTRA`. A later explicit Goblin mode selection replaces
 Active task responses end with the loaded skill version, for example:
 
 ```text
-Active Goblin Mode: MINI-ASTRA v13 | Execution footprint: Coordinator.
+Active Goblin Mode: MINI-ASTRA v14 | Execution footprint: Coordinator.
 ```
 
 This identifies the skill instructions in use, not the model version. Existing tasks must load updated instructions before reporting a newer skill version.
@@ -141,7 +154,7 @@ Read C:\Users\Force\.codex\skills\goblin-mini-astra\SKILL.md from disk and apply
 Preserve this task's scope, approvals, completed work, effective budget, native goal, and accumulated usage. Do not restart the task or reset counters. Reloading the skill does not change this task's model.
 ```
 
-Replace the path if your installed skill is in a different location. To match a supported Coordinator profile, select GPT-6.2 Sol High (default), Sol Medium, or Terra XHigh separately in the host's model controls.
+Replace the path if your installed skill is in a different location. To use the recommended Coordinator, select GPT-6.2 Sol High in the host before reloading. An explicit selection takes precedence over the default.
 
 ## Optional GPT Pro consultation
 
@@ -151,7 +164,7 @@ Pro recommendations are checked against current evidence before implementation. 
 
 ## Validation status
 
-Run helper behavior tests with `python -B -m unittest discover -s tests -v`. Tests use project-local isolated settings, covering first-use setup, saved presets/custom defaults, task overrides, no-budget behavior, invalid data, persistence across processes, and no false claims of native measurement/configuration. They do not alter personal preferences or create native goals. Native goal control and aggregate worker enforcement require live host validation; these tests do not prove them. To evaluate selective High escalation, compare Astra Medium and High at Standard speed on the same decision, evidence, tools, and acceptance check. Compare correctness, rework, time to accepted completion, and attributable usage with coverage. For visual decisions, compare desktop and mobile results blind using the same brief and interaction. Quality, latency, and quota savings for this policy remain unmeasured.
+Run helper behavior tests with `python -B -m unittest discover -s tests -v`. Tests use project-local isolated settings, covering first-use setup, saved presets/custom defaults, task overrides, no-budget behavior, invalid data, persistence across processes, and no false claims of native measurement/configuration. They do not alter personal preferences or create native goals. Native goal control and aggregate worker enforcement require live host validation; these tests do not prove them. To evaluate selective High escalation, compare Astra Medium and High at Standard speed on the same decision, evidence, tools, and acceptance check. Compare correctness, rework, time to accepted completion, and attributable usage with coverage. For visual decisions, compare desktop and mobile results blind using the same brief and interaction. For Computer Use, compare Medium and XHigh on the same starting screen and task, recording successful completion, corrections, elapsed time, and attributable usage. Local quality, latency, and quota savings remain unmeasured.
 
 ## License
 

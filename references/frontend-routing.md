@@ -1,6 +1,6 @@
 # Frontend routing
 
-Load before FE scouting, design, implementation, debugging, or visual and interaction testing, including small edits. Use the [shared model table](model-profiles.md) for effort selection. Only Sol and Astra execute FE work. Luna may own a separable non-FE outcome in the same task.
+Load before FE scouting, design, implementation, debugging, or visual and interaction testing, including small edits. Use the [shared model table](model-profiles.md) for effort selection. Only Sol and Astra execute FE work, including reproducing a product UI defect. Operating an existing app to complete a business task follows the Computer Use rule in the shared table. Luna may own a separable non-FE outcome in the same task.
 
 ## Establish what still needs design
 

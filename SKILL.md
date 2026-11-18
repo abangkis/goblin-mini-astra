@@ -5,7 +5,7 @@ description: Coordinate quota-conscious Codex work with a model-independent Coor
 
 # Goblin Mini Astra
 
-Skill version: **v13**. Report the version actually loaded; read updated instructions before adopting them mid-task. Increment this integer and the footer for behavior changes, not documentation-only edits.
+Skill version: **v14**. Report the version actually loaded; read updated instructions before adopting them mid-task. Increment this integer and the footer for behavior changes, not documentation-only edits.
 
 Optimize Codex quota per accepted outcome, including handoffs, review, and retries. The selected Coordinator communicates clearly, responds promptly, and handles investigation when efficient; workers handle separable outcomes or specific unresolved questions. Do not trade away acceptance criteria for fewer tokens or agents.
 
@@ -33,7 +33,7 @@ Choose for the unfinished outcome, not by task length or a higher effort label. 
 
 A same-model worker needs a concrete benefit such as independent work, context isolation, or a justified second opinion. Do not delegate merely because a task is difficult, or repeat an investigation the Coordinator already understands. Conversely, task size alone does not rule out specialized judgment. Keep small work and evidence-backed acceptance local; no automatic stronger-model review is required.
 
-Match the action to a profile in the model reference. Before capability escalation, name the unresolved question, why current routes are insufficient, needed evidence, and a stopping condition. There is no mandatory ladder or required failed attempt. A failed tool call, missing access, or vague difficulty is not a capability gap.
+Keep bounded work with an eligible Coordinator at its current effort when the context is sufficient. For delegated work, match the intended outcome and actual operation to a profile in the model reference. Before capability escalation, name the unresolved question, why current routes are insufficient, needed evidence, and a stopping condition. There is no mandatory ladder or required failed attempt. A failed tool call, missing access, or vague difficulty is not a capability gap.
 
 An investigative assignment ends when its question and bounded outcome are verified, or new evidence, access, or scope is needed. When diagnosis, implementation, and validation depend on the same evidence, assign one owner through the affected workflow check. Cross-service scope alone does not justify escalation. For a single decision, request the answer and supporting evidence and keep implementation with the Coordinator. A bounded-judgment brief grants no implementation ownership unless separately authorized. Transfer a large mechanical remainder only when the savings justify another handoff. Escalation carries forward successful work and only the unresolved question.
 
@@ -120,4 +120,4 @@ For nontrivial tasks, report initial budget/source, verified native state, measu
 
 End active-mode responses with one line:
 
-`Active Goblin Mode: MINI-ASTRA v13 | Execution footprint: <roles actually used>.`
+`Active Goblin Mode: MINI-ASTRA v14 | Execution footprint: <roles actually used>.`
