@@ -43,6 +43,11 @@ Only Sol and Astra execute FE work, including scouting, mechanical edits, and UI
 
 ## Routing diagram
 
+![Goblin Mini Astra v14 routing from the Sol High Coordinator to direct work or a Terra, Luna, Sol, or Astra worker](assets/goblin-mini-astra-v14-routing.png)
+
+<details>
+<summary>View the detailed routing flowchart</summary>
+
 ```mermaid
 flowchart TD
     C["Coordinator: Sol High by default, honor the thread selection"] --> A{"Which action serves the remaining outcome?"}
@@ -75,6 +80,8 @@ flowchart TD
     V -->|Non-FE| F["Coordinator accepts or reports the specific unverified outcome"]
     R --> F
 ```
+
+</details>
 
 Each assignment keeps its original action and authorization. Bounded judgment returns a decision and evidence. Delegated delivery includes the closely coupled fix and validation when authorized. The Coordinator reserves budget for acceptance.
 
