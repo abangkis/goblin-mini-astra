@@ -32,3 +32,40 @@ For example, a migration rehearsal may pass on each schema separately while a ro
 High is an effort choice within the escalation assignment. A prior Medium attempt is optional. Use bounded judgment for a decision alone. When authorized, one worker can own diagnosis, the closely coupled fix, and its targeted test. Stop when the agreed check settles the decision or the necessary evidence is unavailable.
 
 [GPT Pro consultation](pro-decision-gate.md) requires separate authorization and an available Pro target. Model labels alone establish neither runtime nor measured quota savings.
+
+## Routing diagram
+
+```mermaid
+flowchart TD
+    C["Coordinator: Sol High by default, honor the thread selection"] --> A{"Which action serves the remaining outcome?"}
+    A -->|Direct work| D{"Coordinator eligible and context sufficient?"}
+    D -->|Yes| V
+    D -->|No| S
+    A -->|Delegate an outcome| S{"Which profiles are eligible?"}
+    A -->|Request bounded judgment| S
+    S -->|Non-FE task through existing app controls| T{"Can the authorized worker observe and control the app?"}
+    T -->|Missing access or usable view| X
+    T -->|Yes| U{"Consequential UI ambiguity with a distinguishing check?"}
+    U -->|No| TM["Terra Medium"]
+    U -->|Yes| TX["Terra XHigh"]
+    TM --> V
+    TX --> V
+    S -->|Objective non-FE work| L["Luna: High scout, XHigh routine, Max deep local work"]
+    S -->|FE or non-FE| Q{"What does the work require?"}
+    Q -->|Missing evidence or access| X["Obtain the missing evidence or report the blocked check"]
+    Q -->|Delivery or investigation| I["Sol High for separable delivery or investigation, XHigh for unresolved interactions"]
+    Q -->|Named capability gap with evidence and stop condition| G{"Which Astra effort fits?"}
+    G -->|Specific gap| B["Low"]
+    G -->|Interacting uncertainty or original direction| M["Medium"]
+    G -->|Consequential conflict beyond Medium and an available deciding check| H["High"]
+    L --> V["Coordinator collects evidence and integrates authorized changes"]
+    I --> V
+    B --> V
+    M --> V
+    H --> V
+    V -->|FE| R["Sol or Astra provides desktop and mobile renders and primary interaction evidence"]
+    V -->|Non-FE| F["Coordinator accepts or reports the specific unverified outcome"]
+    R --> F
+```
+
+Each assignment keeps its original action and authorization. Bounded judgment returns a decision and evidence. Delegated delivery includes the closely coupled fix and validation when authorized. The Coordinator reserves budget for acceptance.
